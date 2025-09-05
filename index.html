@@ -58,7 +58,7 @@
     .section-header h2{font-size:clamp(2.25rem,5vw,3.25rem);font-weight:900;margin-bottom:.6rem;letter-spacing:-1px}
     .section-header p{font-size:1.05rem;color:var(--gray-300)}
     .framework-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;max-width:1400px;margin:0 auto}
-    .framework-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center;transition:all .3s ease;position:relative;overflow:hidden}
+    .framework-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center;transition:all .3s ease;position:relative;overflow:visible}
     .framework-card:hover{transform:translateY(-6px);border-color:var(--primary)}
     .framework-letter{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;background:var(--gradient);border-radius:12px;font-size:1.75rem;font-weight:900;color:#fff;margin-bottom:.6rem}
     .framework-card h3{font-size:1.05rem;margin:.25rem 0 .35rem;font-weight:800}
@@ -85,7 +85,7 @@
 
     /* CTA */
     .cta-section{padding:5rem 5%;background:var(--dark)}
-    .cta-container{max-width:1000px;margin:0 auto;text-align:center;padding:3rem;background:var(--gradient);border-radius:24px;position:relative;overflow:hidden}
+    .cta-container{max-width:1000px;margin:0 auto;text-align:center;padding:3rem;background:var(--gradient);border-radius:24px;position:relative;overflow:visible}
     .cta-container::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.06) 20px,rgba(255,255,255,.06) 40px)}
     .cta-content{position:relative;z-index:1}
     .cta-content h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:.6rem}
@@ -122,7 +122,7 @@
   .sheet-btn{background:var(--card-bg);color:#fff;padding:.9rem 1.2rem;border-radius:12px;font-weight:800;border:1px solid var(--border);text-decoration:none;display:inline-flex;align-items:center;gap:.55rem}
     .sheet-btn:hover{transform:translateY(-2px);border-color:var(--primary)}
   .podcast-left{display:flex;flex-direction:column;gap:1rem;align-items:flex-start}
-    .podcast-cover{width:100%;max-width:220px;aspect-ratio:1/1;background:linear-gradient(135deg,var(--gray-800),var(--gray-900));border-radius:16px;overflow:hidden;border:1px solid var(--border);position:relative;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .podcast-cover{width:100%;max-width:220px;aspect-ratio:1/1;background:linear-gradient(135deg,var(--gray-800),var(--gray-900));border-radius:16px;overflow:visible;border:1px solid var(--border);position:relative;box-shadow:0 10px 30px rgba(0,0,0,.35)}
     .podcast-cover img{width:100%;height:100%;object-fit:cover;display:block;opacity:.95;filter:saturate(1.05)}
     .ep-badge{position:absolute;left:8px;bottom:8px;background:var(--gradient);color:#fff;padding:.35rem .6rem;border-radius:999px;font-weight:900;font-size:.8rem;letter-spacing:.02em;box-shadow:0 6px 18px rgba(255,107,53,.4)}
   .ai-howto{margin-top:1rem;padding:1rem 1.25rem;background:var(--card-bg);border:1px solid var(--border);border-radius:12px}
@@ -135,7 +135,7 @@
   .ai-visual{display:flex;align-items:flex-start;justify-content:center}
     @media (min-width:1280px){.ai-features{grid-template-columns:repeat(3,1fr)}}
   .ai-actions{display:flex;flex-direction:column;gap:1rem;align-items:flex-start}
-  .episode-art{width:160px;height:160px;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--card-bg);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+  .episode-art{width:160px;height:160px;border-radius:12px;overflow:visible;border:1px solid var(--border);background:var(--card-bg);box-shadow:0 10px 24px rgba(0,0,0,.35)}
     .episode-art img{width:100%;height:100%;object-fit:cover;display:block}
   .framework-tip{position:absolute;left:50%;top:100%;transform:translate(-50%,8px);width:min(320px,92vw);background:var(--gray-800);border:1px solid var(--border);border-radius:12px;padding:1rem;box-shadow:0 16px 40px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;z-index:10}
     .framework-card:hover .framework-tip,.framework-card:focus-within .framework-tip,.framework-card.tip-open .framework-tip{opacity:1;transform:translate(-50%,0);pointer-events:auto}
@@ -143,6 +143,7 @@
     .tip-title{font-weight:800;margin-bottom:.5rem;font-size:.9rem;color:var(--gray-100)}
     .framework-tip ul{margin:0;padding-left:1.1rem}
     .framework-tip li{margin:.25rem 0;color:var(--gray-200)}
+  .framework-card:hover, .framework-card:focus-within, .framework-card.tip-open{z-index:25}
   </style>
 </head>
 <body>
@@ -239,9 +240,9 @@
         <div class="framework-tip" role="dialog" aria-label="Specific observable behaviors for Explore Options">
           <div class="tip-title">Specific observable behaviors</div>
           <ul>
-            <li>Generate 2–3 viable options.</li>
+            <li>Generate 2-3 viable options.</li>
             <li>Compare trade offs with simple criteria.</li>
-            <li>Timebox exploration to 5–10 minutes.</li>
+            <li>Timebox exploration to 5-10 minutes.</li>
             <li>Pick a path and a next micro step.</li>
             <li>Capture who does what by when.</li>
           </ul>
@@ -255,7 +256,7 @@
           <div class="tip-title">Specific observable behaviors</div>
           <ul>
             <li>Set update cadence and channel.</li>
-            <li>Define 2–3 milestones with dates.</li>
+            <li>Define 2-3 milestones with dates.</li>
             <li>Track in a visible place everyone sees.</li>
             <li>Review what is working and what is not.</li>
             <li>Celebrate wins or reset the plan fast.</li>
