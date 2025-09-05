@@ -152,7 +152,9 @@
     .section-header h2::after{content:"";display:block;width:140px;height:10px;margin:10px auto 0;border-radius:6px;background:conic-gradient(#fff 25%, #000 0 50%, #fff 0 75%, #000 0) 0 0/14px 14px;opacity:.22}
     .podcast-card{position:relative}
     .podcast-card::before{content:"";position:absolute;left:16px;right:16px;top:-6px;height:8px;border-radius:6px;background:conic-gradient(#fff 25%, #000 0 50%, #fff 0 75%, #000 0) 0 0/12px 12px;opacity:.18}
-  .ai-cta{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin:.5rem 0 0}
+  .ai-cta{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch;margin:.75rem 0 0}
+  .ai-cta .btn{width:100%;justify-content:center}
+  @media (max-width:768px){.ai-cta{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
