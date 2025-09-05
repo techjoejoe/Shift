@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SHIFT Coaching - Accelerate Your Leadership Journey</title>
   <meta name="description" content="Transform your leadership through elite coaching and delegation mastery. Explore the SHIFT framework, resources, and AI Coach." />
+  <link rel="preload" as="image" href="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757000236/20250728_2040_3D_Pixar_Logo_remix_01k19xa7z0e18bsmxtjw7cc07p_1_pjwgsv.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SHIFT Coaching - Accelerate Your Leadership" />
+  <meta property="og:description" content="Transform your leadership through elite coaching and delegation mastery. Explore the SHIFT framework..." />
+  <meta property="og:url" content="https://shiftyourcoaching.com/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757000236/20250728_2040_3D_Pixar_Logo_remix_01k19xa7z0e18bsmxtjw7cc07p_1_pjwgsv.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="SHIFT Coaching 3D logo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SHIFT Coaching - Accelerate Your Leadership" />
+  <meta name="twitter:description" content="Transform your leadership through elite coaching and delegation mastery. Explore the SHIFT framework..." />
+  <meta name="twitter:image" content="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757000236/20250728_2040_3D_Pixar_Logo_remix_01k19xa7z0e18bsmxtjw7cc07p_1_pjwgsv.png" />
+  <link rel="icon" href="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757000236/20250728_2040_3D_Pixar_Logo_remix_01k19xa7z0e18bsmxtjw7cc07p_1_pjwgsv.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757000236/20250728_2040_3D_Pixar_Logo_remix_01k19xa7z0e18bsmxtjw7cc07p_1_pjwgsv.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -122,6 +137,12 @@
   .ai-actions{display:flex;flex-direction:column;gap:1rem;align-items:flex-start}
   .episode-art{width:160px;height:160px;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--card-bg);box-shadow:0 10px 24px rgba(0,0,0,.35)}
     .episode-art img{width:100%;height:100%;object-fit:cover;display:block}
+  .framework-tip{position:absolute;left:50%;top:100%;transform:translate(-50%,8px);width:min(320px,92vw);background:var(--gray-800);border:1px solid var(--border);border-radius:12px;padding:1rem;box-shadow:0 16px 40px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;z-index:10}
+    .framework-card:hover .framework-tip,.framework-card:focus-within .framework-tip,.framework-card.tip-open .framework-tip{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+    .framework-tip::before{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%) rotate(45deg);width:14px;height:14px;background:var(--gray-800);border-left:1px solid var(--border);border-top:1px solid var(--border);border-radius:2px}
+    .tip-title{font-weight:800;margin-bottom:.5rem;font-size:.9rem;color:var(--gray-100)}
+    .framework-tip ul{margin:0;padding-left:1.1rem}
+    .framework-tip li{margin:.25rem 0;color:var(--gray-200)}
   </style>
 </head>
 <body>
@@ -129,7 +150,7 @@
   <nav id="navbar" aria-label="Primary">
     <div class="nav-container">
       <a href="#" class="logo" aria-label="SHIFT Coaching home">
-        <img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757102793/LeadingNowLogoWhite_hz6m1g.png" width="160" height="40" alt="Leading Now logo" />
+        <img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757000236/20250728_2040_3D_Pixar_Logo_remix_01k19xa7z0e18bsmxtjw7cc07p_1_pjwgsv.png" width="160" height="40" alt="SHIFT Coaching 3D logo" />
       </a>
       <ul class="nav-links" id="navLinks" role="menu">
         <li role="none"><a role="menuitem" href="#framework">Framework</a></li>
@@ -170,26 +191,76 @@
         <div class="framework-letter" aria-hidden="true">S</div>
         <h3>Set Context</h3>
         <p>Define clear goals and expectations from the start</p>
+        <div class="framework-tip" role="dialog" aria-label="Specific observable behaviors for Set Context">
+          <div class="tip-title">Specific observable behaviors</div>
+          <ul>
+            <li>Explain the purpose, impact, and priority.</li>
+            <li>Define success: outcome, quality bar, and date.</li>
+            <li>Clarify boundaries: scope, budget, constraints.</li>
+            <li>Share an example or template.</li>
+            <li>Ask, “What do you need from me?”</li>
+          </ul>
+        </div>
       </article>
       <article class="framework-card" role="listitem" tabindex="0">
         <div class="framework-letter" aria-hidden="true">H</div>
         <h3>Hear Fully</h3>
         <p>Listen deeply to understand all perspectives</p>
+        <div class="framework-tip" role="dialog" aria-label="Specific observable behaviors for Hear Fully">
+          <div class="tip-title">Specific observable behaviors</div>
+          <ul>
+            <li>Ask open questions; avoid interrupting.</li>
+            <li>Paraphrase to confirm understanding.</li>
+            <li>Name risks and concerns you hear.</li>
+            <li>Invite other viewpoints in the room.</li>
+            <li>Summarize next step you heard.</li>
+          </ul>
+        </div>
       </article>
       <article class="framework-card" role="listitem" tabindex="0">
         <div class="framework-letter" aria-hidden="true">I</div>
         <h3>Invite Ownership</h3>
         <p>Empower teams to lead and take responsibility</p>
+        <div class="framework-tip" role="dialog" aria-label="Specific observable behaviors for Invite Ownership">
+          <div class="tip-title">Specific observable behaviors</div>
+          <ul>
+            <li>Ask for their proposed approach.</li>
+            <li>Confirm the single owner by name.</li>
+            <li>Define decision rights and guardrails.</li>
+            <li>Agree on first milestone and date.</li>
+            <li>Have the owner restate the commitment.</li>
+          </ul>
+        </div>
       </article>
       <article class="framework-card" role="listitem" tabindex="0">
         <div class="framework-letter" aria-hidden="true">F</div>
         <h3>Explore Options</h3>
         <p>Foster creative solutions and innovation</p>
+        <div class="framework-tip" role="dialog" aria-label="Specific observable behaviors for Explore Options">
+          <div class="tip-title">Specific observable behaviors</div>
+          <ul>
+            <li>Generate 2–3 viable options.</li>
+            <li>Compare trade offs with simple criteria.</li>
+            <li>Timebox exploration to 5–10 minutes.</li>
+            <li>Pick a path and a next micro step.</li>
+            <li>Capture who does what by when.</li>
+          </ul>
+        </div>
       </article>
       <article class="framework-card" role="listitem" tabindex="0">
         <div class="framework-letter" aria-hidden="true">T</div>
         <h3>Track Progress</h3>
         <p>Monitor results and celebrate achievements</p>
+        <div class="framework-tip" role="dialog" aria-label="Specific observable behaviors for Track Progress">
+          <div class="tip-title">Specific observable behaviors</div>
+          <ul>
+            <li>Set update cadence and channel.</li>
+            <li>Define 2–3 milestones with dates.</li>
+            <li>Track in a visible place everyone sees.</li>
+            <li>Review what is working and what is not.</li>
+            <li>Celebrate wins or reset the plan fast.</li>
+          </ul>
+        </div>
       </article>
     </div>
   </section>
@@ -282,6 +353,13 @@
     const navbar=qs('#navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>50)});
     const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.style.opacity='1';entry.target.style.transform='translateY(0)';observer.unobserve(entry.target);}})},{threshold:.12,rootMargin:'0px 0px -50px 0px'});
     qsa('.framework-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(16px)';el.style.transition='all .6s ease';observer.observe(el)});
-  </script>
+    // Touch-friendly toggle for framework tips
+  if (window.matchMedia('(hover: none)').matches){
+    qsa('.framework-card').forEach(card=>{
+      card.addEventListener('click', (e)=>{ card.classList.toggle('tip-open'); e.stopPropagation(); });
+    });
+    document.addEventListener('click', ()=> qsa('.framework-card.tip-open').forEach(c=>c.classList.remove('tip-open')));
+  }
+</script>
 </body>
 </html>
