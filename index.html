@@ -144,6 +144,14 @@
     .framework-tip ul{margin:0;padding-left:1.1rem}
     .framework-tip li{margin:.25rem 0;color:var(--gray-200)}
   .framework-card:hover, .framework-card:focus-within, .framework-card.tip-open{z-index:25}
+  /* Checkered accents */
+    .checker-bar{position:relative}
+    .checker-bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;background:conic-gradient(#fff 25%, #000 0 50%, #fff 0 75%, #000 0) 0 0/16px 16px;opacity:.25}
+    .section-header h2{position:relative}
+    .section-header h2::after{content:"";display:block;width:140px;height:10px;margin:10px auto 0;border-radius:6px;background:conic-gradient(#fff 25%, #000 0 50%, #fff 0 75%, #000 0) 0 0/14px 14px;opacity:.22}
+    .podcast-card{position:relative}
+    .podcast-card::before{content:"";position:absolute;left:16px;right:16px;top:-6px;height:8px;border-radius:6px;background:conic-gradient(#fff 25%, #000 0 50%, #fff 0 75%, #000 0) 0 0/12px 12px;opacity:.18}
+  .ai-cta{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin:.5rem 0 0}
   </style>
 </head>
 <body>
@@ -164,7 +172,7 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero checker-bar" aria-labelledby="hero-title">
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-content">
       <div class="hero-text">
@@ -313,7 +321,10 @@
           <div class="ai-feature"><div class="ai-feature-icon" aria-hidden="true">🎯</div><div><h4>Personalized</h4><p>Tailored to your challenges</p></div></div>
           <div class="ai-feature"><div class="ai-feature-icon" aria-hidden="true">🔄</div><div><h4>Continuous Learning</h4><p>Improves with use</p></div></div>
         </div>
-        <a href="https://infolinks.short.gy/SHIFTCoach" class="btn btn-primary" target="_blank" rel="noopener">Open SHIFT Support Coach →</a>
+        <div class="ai-cta">
+          <a href="https://infolinks.short.gy/SHIFTCoach" class="btn btn-primary" target="_blank" rel="noopener">Open SHIFT Support Coach →</a>
+          <a href="https://infolinks.short.gy/SHIFTPromptGuide" class="btn btn-primary" target="_blank" rel="noopener" id="prompt-guide-link">Get SHIFT Prompt Guide →</a>
+        </div>
         <div class="ai-howto">
           <h4>How to add the agent</h4>
           <ol>
