@@ -155,6 +155,27 @@
   .ai-cta{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch;margin:.75rem 0 0}
   .ai-cta .btn{width:100%;justify-content:center}
   @media (max-width:768px){.ai-cta{grid-template-columns:1fr}}
+  /* Mobile optimizations */
+    @media (max-width:768px){
+      .hero{padding:calc(4rem + env(safe-area-inset-top)) 5% 1.25rem}
+      .hero-content{gap:1.75rem}
+      .hero-graphic{max-width:95vw;height:auto}
+      .ai-card{max-width:100%}
+      .ai-cta{grid-template-columns:1fr}
+      .podcast-actions .listen-btn,.podcast-actions .sheet-btn,.podcast-actions .btn{width:100%;justify-content:center}
+      .episode-art{width:120px;height:120px}
+    }
+    @media (max-width:520px){
+      .hero-text h1{font-size:clamp(2rem,9vw,2.6rem);letter-spacing:-1px}
+      .hero-text p{font-size:1rem}
+      .hero-buttons .btn{width:100%;justify-content:center}
+      .framework-grid{grid-template-columns:1fr}
+      .ai-features{grid-template-columns:1fr}
+      .podcast-card{grid-template-columns:1fr}
+      .podcast-actions{gap:.5rem}
+      .podcast-actions a{flex:1 1 100%}
+      .section-header{margin:0 auto 1.5rem}
+    }
   </style>
 </head>
 <body>
