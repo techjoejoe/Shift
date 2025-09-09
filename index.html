@@ -176,6 +176,7 @@
       .podcast-actions a{flex:1 1 100%}
       .section-header{margin:0 auto 1.5rem}
     }
+  .framework-tip, .framework-tip *{text-align:left}
   </style>
   <!-- Google tag (gtag.js) - GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-YV1JLY1BKQ"></script>
@@ -184,6 +185,21 @@
     function gtag(){dataLayer.push(arguments);} 
     gtag('js', new Date());
     gtag('config', 'G-YV1JLY1BKQ');
+  </script>
+  <link rel="canonical" href="https://shiftyourcoaching.com/" />
+  <link rel="preconnect" href="https://www.googletagmanager.com"/>
+  <link rel="preconnect" href="https://www.google-analytics.com"/>
+  <script>
+    // GitHub Pages: canonicalize www → apex while letting GA load first
+    (function(){
+      var host = location.hostname;
+      if (host === 'www.shiftyourcoaching.com') {
+        setTimeout(function(){
+          var url = location.href.replace('://www.','://');
+          location.replace(url);
+        }, 350);
+      }
+    })();
   </script>
 </head>
 <body>
@@ -405,5 +421,25 @@
     document.addEventListener('click', ()=> qsa('.framework-card.tip-open').forEach(c=>c.classList.remove('tip-open')));
   }
 </script>
+  <script>
+    // GA4 click events for key actions (fires only if gtag is available)
+    (function(){
+      const track=(name,params)=>{if(window.gtag){gtag('event',name,params||{});}}
+      document.addEventListener('DOMContentLoaded',function(){
+        document.querySelectorAll('.podcast-card .listen-btn').forEach(btn=>{
+          btn.addEventListener('click',()=>{
+            const title=btn.closest('.podcast-card')?.querySelector('h3')?.textContent?.trim();
+            track('listen_episode',{episode_title:title});
+          });
+        });
+        const diagBtn=document.querySelector('.podcast-card a[href*="leadingnow/loops.html"]');
+        if(diagBtn){diagBtn.addEventListener('click',()=>track('open_delegation_diagnosis'));}
+        const coachBtn=document.querySelector('a[href*="SHIFTCoach"]');
+        if(coachBtn){coachBtn.addEventListener('click',()=>track('open_shift_support_coach'));}
+        const guideBtn=document.getElementById('prompt-guide-link');
+        if(guideBtn){guideBtn.addEventListener('click',()=>track('open_shift_prompt_guide'));}
+      });
+    })();
+  </script>
 </body>
 </html>
