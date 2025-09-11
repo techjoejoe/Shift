@@ -786,20 +786,13 @@
             padding: 1.5rem;
             border-radius: 12px;
             backdrop-filter: blur(5px);
+            list-style: none;
         }
 
         .top-items li {
             margin: 0.75rem 0;
-            padding-left: 1.5rem;
+            padding-left: 0;
             position: relative;
-        }
-
-        .top-items li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: rgba(102, 126, 234, 0.8);
-            font-size: 1.5rem;
         }
 
         .chart-container {
@@ -1113,7 +1106,7 @@
 
         <footer>
             <div class="confidentiality-note glass-card">
-                <strong>🔒 Confidentiality Note:</strong> Your responses are stored locally in your browser and are not transmitted to any server or anyone else. You can clear your data at any time using the Reset button.
+                <strong>🔒 Confidentiality Note:</strong> Your responses are stored locally in your browser and are not transmitted to any server. You can clear your data at any time using the Reset button.
             </div>
         </footer>
     </div>
@@ -1126,6 +1119,20 @@
                 definition: "Avoiding conflict and softening expectations to maintain comfort.",
                 trap: "Unclear expectations lead to confusion and rework.",
                 shift: "Set Context + Hear Fully: anchor to purpose, then invite open dialogue.",
+                suggestedReading: {
+                    title: "Addressing The Crisis Of Leadership Character",
+                    source: "Forbes",
+                    url: "https://www.forbes.com/sites/marycrossan/2025/02/28/addressing-the-crisis-of-leadership-character/",
+                    description: "This article explores the importance of character-based leadership and the courage required to maintain standards even when it's uncomfortable."
+                },
+                behaviorExamples: [
+                    "Saying 'whenever you get a chance' instead of giving clear deadlines",
+                    "Apologizing when following up on overdue deliverables",
+                    "Accepting subpar work to avoid difficult conversations",
+                    "Changing agreed standards when someone seems stressed",
+                    "Taking work back rather than addressing performance issues"
+                ],
+                workplaceScenario: "When a project deadline approaches and quality issues emerge, you find yourself doing the work yourself at night rather than having a direct conversation about standards. Team members learn they can deliver late or incomplete work because you'll either fix it or extend deadlines.",
                 items: [
                     { text: "I soften or remove deadlines to keep my team comfortable, even when commitments are clear.", reverse: false },
                     { text: "I clearly communicate non-negotiable standards, even if it may cause discomfort.", reverse: true },
@@ -1138,6 +1145,20 @@
                 definition: "Doing tasks yourself instead of developing the team.",
                 trap: "Team never grows; you become the bottleneck.",
                 shift: "Invite Ownership: define skills/resources and hand over responsibility.",
+                suggestedReading: {
+                    title: "Heroes Vs. Leaders",
+                    source: "Forbes",
+                    url: "https://www.forbes.com/sites/hillennevins/2021/11/21/heroes-vs-leaders/",
+                    description: "Learn the critical difference between being a hero who does everything and a leader who develops others to succeed independently."
+                },
+                behaviorExamples: [
+                    "Jumping into Slack threads to answer questions meant for team members",
+                    "Redoing presentations instead of providing feedback",
+                    "Attending meetings your team could handle alone",
+                    "Writing the first draft 'to give them a starting point'",
+                    "Solving problems during 1:1s instead of coaching through them"
+                ],
+                workplaceScenario: "Your calendar is packed with 'quick reviews' and you're constantly in the weeds on technical details. Meanwhile, your team waits for your input on everything, their skills atrophy, and you wonder why no one takes initiative. You're exhausted but feel you can't step back.",
                 items: [
                     { text: "I take over tasks my team members could reasonably complete themselves.", reverse: false },
                     { text: "I delegate full ownership of outcomes, not just isolated tasks.", reverse: true },
@@ -1150,6 +1171,20 @@
                 definition: "Controlling both outcomes and methods too tightly.",
                 trap: "Team can't act without your approval; innovation stalls.",
                 shift: "Frame Actions: co-create plans with embedded decision rights.",
+                suggestedReading: {
+                    title: "Why The Best Leaders Turn Rethinking Into A Competitive Advantage",
+                    source: "Forbes",
+                    url: "https://www.forbes.com/sites/paolacecchi-dimeglio/2025/03/06/how-the-best-leaders-turn-rethinking-into-a-competitive-advantage/",
+                    description: "Discover how letting go of control and empowering teams to think differently creates competitive advantage through innovation."
+                },
+                behaviorExamples: [
+                    "Prescribing exact email templates for team communications",
+                    "Requiring approval for routine decisions within their scope",
+                    "Dictating specific tools or methods when alternatives would work",
+                    "Reviewing work at every step rather than at milestones",
+                    "Correcting style preferences that don't impact outcomes"
+                ],
+                workplaceScenario: "Your team sends you drafts of drafts, asks permission for minor decisions, and waits for your review before proceeding to next steps. Innovation has stopped because everyone follows your exact playbook. Projects move slowly as everything bottlenecks through your approvals.",
                 items: [
                     { text: "I dictate both the outcome and the exact steps team members must follow.", reverse: false },
                     { text: "When a method is required, I explain the reason and give team members autonomy within clear constraints.", reverse: true },
@@ -1162,6 +1197,20 @@
                 definition: "Pushing for speed while staying in the middle of decisions.",
                 trap: "Execution speed limited by your constant involvement.",
                 shift: "Track Progress: empower action without being a bottleneck.",
+                suggestedReading: {
+                    title: "Getting Focused on Results",
+                    source: "Harvard Business Review",
+                    url: "https://hbr.org/2007/11/getting-focused-on-results",
+                    description: "Learn how to drive results through systems and empowerment rather than constant personal involvement in execution."
+                },
+                behaviorExamples: [
+                    "Asking for daily updates on weekly deliverables",
+                    "Joining meetings to 'help move things along'",
+                    "Taking over parts of projects to maintain momentum",
+                    "Creating urgency without considering sustainable pace",
+                    "Measuring activity metrics instead of outcomes"
+                ],
+                workplaceScenario: "Every project feels urgent, and you're constantly checking in to 'remove blockers' that often means doing part of the work yourself. The team feels pressured but paradoxically slower because they wait for your involvement. Burnout is rising while actual delivery speed decreases.",
                 items: [
                     { text: "I request frequent updates, sometimes at the expense of my team's focus.", reverse: false },
                     { text: "I anchor check-ins on milestones and outcomes rather than daily activity reports.", reverse: true },
@@ -1174,8 +1223,22 @@
                 definition: "Clear vision but weak systems to deliver consistently.",
                 trap: "Success depends on individual heroics rather than processes.",
                 shift: "Build systems: create repeatable processes and support structures.",
+                suggestedReading: {
+                    title: "Stop Being The Hero Leader: Why Great Teams Need Less Leadership",
+                    source: "Forbes",
+                    url: "https://www.forbes.com/sites/keithferrazzi/2025/01/31/stop-being-the-hero-leader-why-great-teams-need-less-leadership/",
+                    description: "Understand why relying on heroic efforts undermines team capability and learn how to build systems that enable consistent success."
+                },
+                behaviorExamples: [
+                    "Relying on star performers to figure things out",
+                    "Celebrating heroic efforts instead of building prevention",
+                    "Having undocumented processes that live in people's heads",
+                    "Different team members achieving wildly different results",
+                    "Knowledge concentrated in a few key individuals"
+                ],
+                workplaceScenario: "Your team succeeds through extraordinary individual efforts and late nights. When your top performer is on vacation, projects stall. New team members struggle because there's no clear process to follow. Success feels fragile and person-dependent rather than systematic.",
                 items: [
-                    { text: "I communicate direction but do not put in place the systems needed for consistent execution.", reverse: false },
+                    { text: "I share direction but do not put in place the systems needed for consistent execution.", reverse: false },
                     { text: "I ensure there are documented workflows and tools so people can execute without me.", reverse: true },
                     { text: "My team's success depends more on ad-hoc individual effort than on consistent systems.", reverse: false },
                     { text: "I standardize successful practices so outcomes are repeatable across people.", reverse: true }
@@ -1186,6 +1249,20 @@
                 definition: "Systems exist but drift without reinforcement.",
                 trap: "Long-term ownership decays; standards become inconsistent.",
                 shift: "Track Progress + Invite Ownership: reinforce expectations regularly.",
+                suggestedReading: {
+                    title: "Today's Most Crucial Leadership Skill Is Systems Thinking",
+                    source: "Forbes",
+                    url: "https://www.forbes.com/sites/maryjohnstone-louis/2025/04/25/todays-most-crucial-leadership-skill-is-systems-thinking/",
+                    description: "Explore how systems thinking helps maintain clarity and accountability over time, preventing the drift that undermines team performance."
+                },
+                behaviorExamples: [
+                    "Assuming everyone remembers decisions from months ago",
+                    "Not revisiting role clarity as the team evolves",
+                    "Letting process exceptions become the new normal",
+                    "Forgetting to celebrate wins that reinforce standards",
+                    "Ownership boundaries becoming fuzzy over time"
+                ],
+                workplaceScenario: "What started as clear roles and processes has slowly eroded. Team members aren't sure who owns what anymore, standards vary by person, and you find yourself repeatedly clarifying expectations you thought were established. The strong foundation you built is crumbling from lack of maintenance.",
                 items: [
                     { text: "Ownership of responsibilities becomes unclear unless I frequently step in to remind people.", reverse: false },
                     { text: "My team shares a current and common understanding of roles and standards.", reverse: true },
@@ -1606,9 +1683,6 @@
             
             let html = '';
             
-            // Chart
-            html += createChart(results.scores);
-            
             // Strengths section (if any)
             if (results.strengths.length > 0) {
                 html += `
@@ -1640,23 +1714,49 @@
                     <p class="stage-description">${primaryStage.definition}</p>
                     
                     <div class="result-section">
-                        <h3>Your Top Behaviors</h3>
+                        <h3>What This Looks Like</h3>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.6; opacity: 0.95;">
+                            ${primaryStage.workplaceScenario}
+                        </p>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h3>Common Behaviors You May Recognize</h3>
                         <ul class="top-items">
-                            ${results.topItems.map(item => `<li>${item}</li>`).join('')}
+                            ${primaryStage.behaviorExamples.slice(0, 4).map(example => 
+                                `<li>${example}</li>`
+                            ).join('')}
                         </ul>
                     </div>
                     
                     <div class="result-section">
-                        <h3>Risk to Watch</h3>
+                        <h3>The Hidden Cost</h3>
                         <div class="trap-warning">
                             ⚠️ ${primaryStage.trap}
                         </div>
                     </div>
                     
                     <div class="result-section">
-                        <h3>Development Focus</h3>
+                        <h3>Your Development Path</h3>
                         <div class="shift-emphasis">
                             💡 ${primaryStage.shift}
+                        </div>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h3>Recommended Reading</h3>
+                        <div style="background: rgba(255, 255, 255, 0.05); padding: 1.25rem; border-radius: 12px; border-left: 3px solid #ff8f1c;">
+                            <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">
+                                <a href="${primaryStage.suggestedReading.url}" target="_blank" style="color: #ff8f1c; text-decoration: none; border-bottom: 1px solid rgba(255, 143, 28, 0.3);">
+                                    ${primaryStage.suggestedReading.title}
+                                </a>
+                            </h4>
+                            <p style="font-size: 0.9rem; margin-bottom: 0.5rem; opacity: 0.8;">
+                                ${primaryStage.suggestedReading.source}
+                            </p>
+                            <p style="font-size: 0.95rem; line-height: 1.5; opacity: 0.9;">
+                                ${primaryStage.suggestedReading.description}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1742,20 +1842,32 @@ PRIMARY FOCUS AREA: ${results.primary.stage.toUpperCase()}
 Strength Level: ${results.primary.strength} (${results.primary.score}/${results.primary.maxScore})
 Definition: ${primaryStage.definition}
 
-Top Behaviors Identified:
-${results.topItems.map((item, i) => `  ${i + 1}. ${item}`).join('\n')}
+WHAT THIS LOOKS LIKE:
+${primaryStage.workplaceScenario}
 
-⚠️ RISK TO WATCH:
+COMMON BEHAVIORS YOU MAY RECOGNIZE:
+${primaryStage.behaviorExamples.slice(0, 4).map((example, i) => `  ${i + 1}. ${example}`).join('\n')}
+
+⚠️ THE HIDDEN COST:
 ${primaryStage.trap}
 
-💡 DEVELOPMENT FOCUS:
+💡 YOUR DEVELOPMENT PATH:
 ${primaryStage.shift}
+
+📚 RECOMMENDED READING:
+"${primaryStage.suggestedReading.title}"
+Source: ${primaryStage.suggestedReading.source}
+Link: ${primaryStage.suggestedReading.url}
+${primaryStage.suggestedReading.description}
 
 ════════════════════════════════════════
 SECONDARY AREA: ${results.secondary.stage.toUpperCase()}
 ════════════════════════════════════════
 Strength Level: ${results.secondary.strength} (${results.secondary.score}/${results.secondary.maxScore})
 Definition: ${secondaryStage.definition}
+
+WORKPLACE SCENARIO:
+${secondaryStage.workplaceScenario}
 
 While your primary focus should be on ${results.primary.stage},
 be aware that ${results.secondary.stage} tendencies may also
@@ -1780,11 +1892,12 @@ ${results.strengths.map(s => `  • ${s.displayName}: ${s.description}`).join('\
 ════════════════════════════════════════
 NEXT STEPS
 ════════════════════════════════════════
-1. Review your top behaviors and identify patterns
-2. Focus on the development areas for your primary stage
-3. Monitor the risks associated with both stages
-4. Practice the recommended shifts in your daily leadership
-5. Reassess in 60-90 days to track progress
+1. Review the workplace scenarios - do they resonate?
+2. Notice when you exhibit the common behaviors listed
+3. Focus on your development path for the primary stage
+4. Build awareness of secondary patterns
+5. Practice new approaches in low-stakes situations first
+6. Reassess in 60-90 days to track progress
 
 Assessment completed on ${new Date().toLocaleDateString()}`;
             
@@ -1948,10 +2061,6 @@ Assessment completed on ${new Date().toLocaleDateString()}`;
                                 </div>
                             `).join('')}
                         </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 1.5rem; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">
-                        Higher percentages indicate areas needing more attention
                     </div>
                 </div>
             `;
