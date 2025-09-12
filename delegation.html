@@ -768,12 +768,16 @@
         
         @keyframes confetti-fall {
             0% {
-                transform: translateY(-100vh) rotate(0deg);
+                transform: translateY(-100vh) rotate(0deg) scale(0);
+                opacity: 1;
+            }
+            10% {
+                transform: translateY(-80vh) rotate(180deg) scale(1);
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
+                transform: translateY(100vh) rotate(720deg) scale(1);
+                opacity: 0.8;
             }
         }
         
@@ -1282,7 +1286,7 @@
 
         <div class="instructions glass-card">
             <h2>Instructions</h2>
-            <p>Think about your behavior over the last 30-60 days. Rate how often each statement describes you.</p>
+            <p>Think about your behavior over the last 30 days. Rate how often each statement describes you.</p>
         </div>
 
         <div class="progress-container glass-card">
@@ -1574,7 +1578,7 @@
             likertHeader.className = 'section-header glass-card';
             likertHeader.innerHTML = `
                 <h3>Part 1: Behavioral Frequency</h3>
-                <p class="section-description">Rate how often each statement describes your behavior over the last 30-60 days.</p>
+                <p class="section-description">Rate how often each statement describes your behavior over the last 30 days.</p>
             `;
             form.appendChild(likertHeader);
             
@@ -1761,10 +1765,25 @@
                 return;
             }
             
-            // Create confetti celebration!
+            // Hide the progress bar, instructions, and assessment form
+            const progressBar = document.querySelector('.progress-container');
+            const assessmentForm = document.getElementById('assessmentForm');
+            const instructionsPanel = document.getElementById('instructionsPanel');
+            
+            if (progressBar) {
+                progressBar.style.display = 'none';
+            }
+            if (assessmentForm) {
+                assessmentForm.style.display = 'none';
+            }
+            if (instructionsPanel) {
+                instructionsPanel.style.display = 'none';
+            }
+            
+            // Create confetti celebration immediately!
             createConfetti();
             
-            // Calculate scores after a short delay for effect
+            // Calculate scores and show results after a brief moment
             setTimeout(() => {
                 const scores = calculateScores();
                 const results = analyzeResults(scores);
@@ -1776,7 +1795,7 @@
                 setTimeout(() => {
                     document.getElementById('resultsPanel').scrollIntoView({ behavior: 'smooth' });
                 }, 100);
-            }, 800);
+            }, 500);
         }
         
         // Create confetti effect
@@ -1785,16 +1804,21 @@
             container.className = 'confetti-container';
             document.body.appendChild(container);
             
-            const colors = ['#ff8f1c', '#ed2024', '#ffb366', '#323e48', '#ff6b6b', '#5a6670', '#ffffff'];
-            const confettiCount = 150;
+            const colors = ['#ff8f1c', '#ed2024', '#ffb366', '#323e48', '#ff6b6b', '#5a6670', '#ffffff', '#ffd700', '#ff69b4'];
+            const confettiCount = 300; // Doubled from 150
             
             for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
                 confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDelay = Math.random() * 0.5 + 's';
-                confetti.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 0.1 + 's'; // Much faster - 0-100ms
+                confetti.style.animationDuration = (Math.random() * 1 + 1.5) + 's'; // Faster fall - 1.5-2.5s
+                
+                // Vary sizes for more dynamic effect
+                const size = Math.random() * 8 + 6; // 6-14px
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
                 
                 // Random shapes
                 if (Math.random() > 0.5) {
@@ -1809,7 +1833,7 @@
             // Remove confetti after animation completes
             setTimeout(() => {
                 container.remove();
-            }, 4000);
+            }, 3000); // Slightly shorter cleanup
         }
 
         // Calculate scores by stage
@@ -2110,9 +2134,16 @@
             resultsPanel.innerHTML = html;
             resultsPanel.style.display = 'block';
             
-            // Smooth scroll to results with a slight delay
+            // Smooth scroll to interpretation guide
             setTimeout(() => {
-                resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const interpretationGuide = resultsPanel.querySelector('.interpretation-guide');
+                if (interpretationGuide) {
+                    const guideTop = interpretationGuide.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: guideTop - 50,
+                        behavior: 'smooth'
+                    });
+                }
             }, 100);
             
             // Store results for export
@@ -2137,6 +2168,24 @@
                     el.offsetHeight; // Trigger reflow
                     el.style.animation = '';
                 });
+                
+                // Scroll to show the results starting from strengths or primary focus
+                setTimeout(() => {
+                    const strengthSection = content.querySelector('.strength-feedback');
+                    const primarySection = content.querySelector('.stage-card');
+                    const targetElement = strengthSection || primarySection;
+                    
+                    if (targetElement) {
+                        // Calculate position to show element at top with some padding
+                        const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        const offset = 100; // Padding from top of viewport
+                        
+                        window.scrollTo({
+                            top: elementTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 100);
             }
         }
         
