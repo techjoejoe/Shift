@@ -500,7 +500,7 @@
             padding: 1.25rem;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s var(--ease-out);
@@ -509,13 +509,12 @@
 
         .forced-choice-option input[type="radio"]:checked + label {
             background: linear-gradient(135deg, rgba(255, 143, 28, 0.2), rgba(237, 32, 36, 0.2));
-            border-color: #ff8f1c;
+            border: 2px solid #ff8f1c;
             font-weight: 600;
         }
 
         .forced-choice-option label:hover {
             background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
             transform: translateX(5px);
         }
 
@@ -825,15 +824,17 @@
 
         .stage-badge {
             display: inline-block;
-            padding: 0.5rem 1.25rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-left: 0.5rem;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            min-width: 180px;
+            text-align: center;
         }
 
         .stage-badge.primary {
@@ -845,15 +846,36 @@
         }
 
         .stage-badge.strong {
-            background: linear-gradient(135deg, rgba(67, 233, 123, 0.5), rgba(56, 249, 215, 0.5));
+            background: linear-gradient(135deg, #ed2024, #ff8f1c);
+            color: white;
+            font-size: 1.3rem;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 6px 30px rgba(237, 32, 36, 0.5);
+            animation: pulse 2s infinite;
         }
 
         .stage-badge.moderate {
-            background: linear-gradient(135deg, rgba(250, 112, 154, 0.5), rgba(254, 225, 64, 0.5));
+            background: linear-gradient(135deg, #ffb366, #ff8f1c);
+            color: white;
+            font-size: 1.2rem;
+            padding: 0.9rem 2.2rem;
+            box-shadow: 0 5px 25px rgba(255, 143, 28, 0.4);
         }
 
         .stage-badge.low {
-            background: linear-gradient(135deg, rgba(148, 163, 184, 0.5), rgba(100, 116, 139, 0.5));
+            background: linear-gradient(135deg, #5a6670, #323e48);
+            color: white;
+            font-size: 1.1rem;
+            padding: 0.8rem 2rem;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .score-display {
+            margin-top: 1rem;
         }
 
         .stage-description {
@@ -863,6 +885,20 @@
             font-style: italic;
             position: relative;
             z-index: 1;
+        }
+        
+        .interpretation-guide {
+            background: linear-gradient(135deg, rgba(50, 62, 72, 0.3), rgba(255, 255, 255, 0.1));
+            border: 2px solid rgba(255, 143, 28, 0.3);
+            animation: slideInFromBottom 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .guide-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
         }
 
         .result-section {
@@ -1897,9 +1933,52 @@
             
             let html = '<div class="results-animated">';
             
+            // Add interpretation guide first
+            html += `
+                <div class="interpretation-guide glass-card" style="animation-delay: 0.2s;">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;">
+                        📊 How to Read Your Results
+                    </h2>
+                    
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div class="guide-section">
+                            <h3 style="color: #ff8f1c; margin-bottom: 0.5rem;">What You'll See:</h3>
+                            <p>Your results show which leadership patterns you use most often. We all have these patterns - they're not good or bad, just habits that might be holding you back.</p>
+                        </div>
+                        
+                        <div class="guide-section">
+                            <h3 style="color: #ff8f1c; margin-bottom: 0.5rem;">Your Score Means:</h3>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-left: 1rem;">
+                                <div><strong style="color: #ed2024;">STRONG (17-28):</strong> This pattern shows up a lot. It's probably affecting your team daily.</div>
+                                <div><strong style="color: #ff8f1c;">MODERATE (12-16):</strong> You do this sometimes. It's worth watching.</div>
+                                <div><strong style="color: #5a6670;">LOW (4-11):</strong> You rarely do this. That's actually a strength!</div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-section">
+                            <h3 style="color: #ff8f1c; margin-bottom: 0.5rem;">Focus on Your Primary Area:</h3>
+                            <p>Your "Primary Focus Area" is where small changes will make the biggest difference. Don't try to fix everything - just focus on this one area for the next month.</p>
+                        </div>
+                        
+                        <div class="guide-section" style="background: rgba(255, 143, 28, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #ff8f1c;">
+                            <p style="margin: 0; font-weight: 600;">💡 Remember: Every leader has these patterns. Knowing yours is the first step to breaking free from them.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-secondary" onclick="showResults()" style="background: linear-gradient(135deg, #ff8f1c, #ed2024); border: none;">
+                            Got It! Show My Results →
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Store results content but don't show yet
+            let resultsContent = '';
+            
             // Strengths section (if any)
             if (results.strengths.length > 0) {
-                html += `
+                resultsContent += `
                     <div class="strength-feedback glass-card strength-animated" style="animation-delay: 0.3s;">
                         <h3>🌟 Your Leadership Strengths</h3>
                         <p style="margin-bottom: 1rem;">These areas show mature leadership practices:</p>
@@ -1913,14 +1992,13 @@
             }
             
             // Primary stage card
-            html += `
+            resultsContent += `
                 <div class="stage-card glass-card stage-card-animated" style="animation-delay: 0.6s;">
                     <div class="stage-header">
                         <h2 class="stage-title">Primary Focus Area: ${primaryStage.displayName}</h2>
-                        <div>
-                            <span class="stage-badge primary">PRIMARY</span>
+                        <div class="score-display">
                             <span class="stage-badge ${results.primary.strength}">
-                                ${results.primary.strength.toUpperCase()} (${results.primary.score}/${results.primary.maxScore})
+                                ${results.primary.strength.toUpperCase()} ${results.primary.score}/${results.primary.maxScore}
                             </span>
                         </div>
                     </div>
@@ -1978,14 +2056,13 @@
             
             // Secondary stage card (if not tied)
             if (!results.isTie) {
-                html += `
+                resultsContent += `
                     <div class="stage-card glass-card stage-card-animated" style="animation-delay: 2.4s;">
                         <div class="stage-header">
                             <h2 class="stage-title">Secondary Area: ${secondaryStage.displayName}</h2>
-                            <div>
-                                <span class="stage-badge secondary">SECONDARY</span>
+                            <div class="score-display">
                                 <span class="stage-badge ${results.secondary.strength}">
-                                    ${results.secondary.strength.toUpperCase()} (${results.secondary.score}/${results.secondary.maxScore})
+                                    ${results.secondary.strength.toUpperCase()} ${results.secondary.score}/${results.secondary.maxScore}
                                 </span>
                             </div>
                         </div>
@@ -2005,7 +2082,7 @@
             }
             
             // Action buttons
-            html += `
+            resultsContent += `
                 <div class="action-buttons action-buttons-animated" style="animation-delay: 3s;">
                     <button class="btn btn-secondary" onclick="copyResults()">
                         <span>📋</span>
@@ -2018,6 +2095,8 @@
                 </div>
             `;
             
+            // Add wrapper div and store in hidden div
+            html += `<div id="resultsContent" style="display: none;">${resultsContent}</div>`;
             html += '</div>';
             
             resultsPanel.innerHTML = html;
@@ -2030,6 +2109,27 @@
             
             // Store results for export
             window.currentResults = results;
+        }
+        
+        // Function to show results after interpretation guide
+        function showResults() {
+            const guide = document.querySelector('.interpretation-guide');
+            const content = document.getElementById('resultsContent');
+            
+            if (guide) {
+                guide.style.display = 'none';
+            }
+            
+            if (content) {
+                content.style.display = 'block';
+                // Re-trigger animations
+                const animatedElements = content.querySelectorAll('.stage-card-animated, .strength-animated, .result-section-animated, .action-buttons-animated');
+                animatedElements.forEach(el => {
+                    el.style.animation = 'none';
+                    el.offsetHeight; // Trigger reflow
+                    el.style.animation = '';
+                });
+            }
         }
         
         // Copy results to clipboard in formatted text
