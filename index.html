@@ -66,7 +66,7 @@
     .framework-card p{color:var(--gray-400);font-size:.95rem}
 
     /* Resources */
-    .resources{padding:5rem 5%;background:var(--gray-900)}
+    .resources{padding:5rem 5%;background:var(--dark)}
     .resource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;max-width:1400px;margin:0 auto}
     .resource-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all .3s ease}
     .resource-card:hover{transform:translateY(-5px);border-color:var(--primary)}
@@ -74,7 +74,7 @@
     .resource-link{color:var(--primary);text-decoration:none;font-weight:800;display:inline-flex;align-items:center;gap:.5rem}
 
     /* AI Card */
-    .ai-section{padding:5rem 5%;background:linear-gradient(180deg,var(--dark) 0%,var(--gray-900) 100%)}
+    .ai-section{padding:2rem 5% 5rem;background:linear-gradient(180deg,var(--dark) 0%,var(--gray-900) 100%)}
     .ai-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;column-gap:3rem;row-gap:0;align-items:flex-start}
     .ai-text h2{font-size:clamp(2.25rem,5vw,3.25rem);font-weight:900;margin-bottom:1rem;letter-spacing:-1px}
     .ai-text h2 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -113,7 +113,8 @@
     .podcast-info p{color:var(--gray-300)}
     .podcast-meta{display:flex;gap:1rem;color:var(--gray-400);font-size:.95rem;margin:.5rem 0 1rem}
     .audio-player audio{width:100%}
-    .podcast-actions{margin-top:0;display:flex;flex-direction:column;gap:.75rem;align-items:flex-start}
+    .podcast-actions{margin-top:0;display:flex;flex-direction:column;gap:.75rem;align-items:stretch;min-width:220px}
+    .podcast-actions .listen-btn, .podcast-actions .sheet-btn{width:100%;justify-content:center}
     @media (max-width:900px){.podcast-card{grid-template-columns:1fr}}
   .podcast-card + .podcast-card{margin-top:1rem}
     .btn[disabled]{opacity:.5;cursor:not-allowed}
@@ -213,8 +214,9 @@
       <ul class="nav-links" id="navLinks" role="menu">
         <li role="none"><a role="menuitem" href="#framework">Framework</a></li>
         <li role="none"><a role="menuitem" href="#podcast">Podcast</a></li>
+        <li role="none"><a role="menuitem" href="#resources">Resources</a></li>
         <li role="none"><a role="menuitem" href="#ai">AI Coach</a></li>
-        <li role="none"><a role="menuitem" class="nav-cta" href="#contact">Get Started</a></li>
+        <li role="none"><a role="menuitem" class="nav-cta" href="#" id="hypeButton">Get Hyped</a></li>
       </ul>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
     </div>
@@ -354,17 +356,37 @@
       </div>
       <div class="podcast-actions">
         <a class="listen-btn" href="https://res.cloudinary.com/dwfzc3ygn/video/upload/v1757078424/DelegationPodcast_krb3ih.mp3" target="_blank" rel="noopener">🎧 Listen to Episode</a>
-        <a class="sheet-btn" href="https://docs.paylocity.com/functional_leadership_development/leadingnow/loops.html" target="_blank" rel="noopener">Delegation Diagnosis</a>
+        <a class="sheet-btn" href="https://www.shiftyourcoaching.com/delegate" target="_blank" rel="noopener">📋 Delegation Diagnosis</a>
       </div>
     </div>
   </section>
 
-  <!-- AI -->
+  <!-- Leadership Tools Section -->
+  <section id="resources" class="resources" aria-labelledby="resources-title">
+    <div class="section-header">
+      <h2 id="resources-title">Leadership Tools</h2>
+      <p>Practical resources to accelerate your leadership journey</p>
+    </div>
+    <div class="resource-grid">
+      <article class="resource-card">
+        <div class="resource-tag">DELEGATION</div>
+        <h3>SHIFT for Delegation</h3>
+        <p>Master the art of effective delegation with our comprehensive diagnosis tool. Identify your leadership loops to understand common pitfalls, and learn how to empower your team while maintaining quality outcomes.</p>
+        <a href="https://www.shiftyourcoaching.com/delegation" class="resource-link" target="_blank" rel="noopener">
+          Take the Delegation Diagnosis →
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- AI Coach Section -->
   <section id="ai" class="ai-section" aria-labelledby="ai-title">
+    <div class="section-header">
+      <h2 id="ai-title">Meet your <span>AI Coach</span></h2>
+      <p>Experience the future of leadership development with an assistant that is always ready to help.</p>
+    </div>
     <div class="ai-content">
       <div class="ai-text">
-        <h2 id="ai-title">Meet your <span>AI Coach</span></h2>
-        <p>Experience the future of leadership development with an assistant that is always ready to help.</p>
         <div class="ai-features">
           <div class="ai-feature"><div class="ai-feature-icon" aria-hidden="true">⚡</div><div><h4>Instant Guidance</h4><p>Real time tips and scripts</p></div></div>
           <div class="ai-feature"><div class="ai-feature-icon" aria-hidden="true">🎯</div><div><h4>Personalized</h4><p>Tailored to your challenges</p></div></div>
@@ -403,7 +425,7 @@
         <h2 id="cta-title">Ready to SHIFT into high gear?</h2>
         <p>Transform your leadership with SHIFT Coaching</p>
         <div class="cta-buttons">
-          <a href="#framework" class="btn-white">Review the Framework</a>
+          <a href="#framework" class="btn-white">Review Framework Now</a>
           <a href="#ai" class="btn btn-secondary">Try AI Coach First</a>
         </div>
       </div>
@@ -423,6 +445,23 @@
       card.addEventListener('click', (e)=>{ card.classList.toggle('tip-open'); e.stopPropagation(); });
     });
     document.addEventListener('click', ()=> qsa('.framework-card.tip-open').forEach(c=>c.classList.remove('tip-open')));
+  }
+  // Get Hyped button audio
+  const hypeButton = qs('#hypeButton');
+  let hypeAudio = null;
+  if(hypeButton) {
+    hypeButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if(!hypeAudio) {
+        hypeAudio = new Audio('https://res.cloudinary.com/dwfzc3ygn/video/upload/v1757685120/Engine_rumble_steady_beat_Remix_1_r0avij.mp3');
+      }
+      if(hypeAudio.paused) {
+        hypeAudio.play();
+      } else {
+        hypeAudio.pause();
+        hypeAudio.currentTime = 0;
+      }
+    });
   }
 </script>
   <script>
