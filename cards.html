@@ -114,6 +114,16 @@
     .flip-inner.flipped ~ .click-hint{opacity:0;pointer-events:none}
     .flip-wrap.clickable{touch-action:manipulation;-webkit-tap-highlight-color:transparent;position:relative}
 
+    /* ── CARD STACK VISUAL (face-down) ── */
+    .card-stack-visual{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--dark)}
+    .cs-card{position:absolute;width:68%;aspect-ratio:5/7;border-radius:14px;overflow:hidden;box-shadow:0 12px 32px rgba(0,0,0,.6)}
+    .cs-card img{width:100%;height:100%;object-fit:cover;display:block;border-radius:14px}
+    .cs1{transform:rotate(-7deg) translate(-4px,6px);z-index:1;opacity:.55}
+    .cs2{transform:rotate(-3.5deg) translate(-2px,3px);z-index:2;opacity:.7}
+    .cs3{transform:rotate(.5deg);z-index:3;opacity:.85}
+    .cs4{transform:rotate(4deg) translate(2px,3px);z-index:4;opacity:.93}
+    .cs5{transform:rotate(0deg);z-index:5;box-shadow:0 16px 40px rgba(0,0,0,.7)}
+
     /* face-down placeholders */
     .placeholder-back{display:flex;align-items:center;justify-content:center;height:100%;border:2px dashed var(--border);border-radius:20px;flex-direction:column;gap:.75rem;color:var(--gray-700)}
     .placeholder-back .ph-icon{font-size:2.8rem;opacity:.3}
@@ -315,7 +325,13 @@
       <div class="flip-inner" id="scenInner">
         <!-- Face down -->
         <div class="flip-face flip-back">
-          <img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" />
+          <div class="card-stack-visual">
+            <div class="cs-card cs1"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="" /></div>
+            <div class="cs-card cs2"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="" /></div>
+            <div class="cs-card cs3"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="" /></div>
+            <div class="cs-card cs4"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="" /></div>
+            <div class="cs-card cs5"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" /></div>
+          </div>
         </div>
         <!-- Face up (content) -->
         <div class="flip-face flip-front scenario-front" id="scenContent"></div>
@@ -328,7 +344,13 @@
       <div class="flip-inner" id="techInner">
         <!-- Face down -->
         <div class="flip-face flip-back">
-          <img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" />
+          <div class="card-stack-visual">
+            <div class="cs-card cs1"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="" /></div>
+            <div class="cs-card cs2"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="" /></div>
+            <div class="cs-card cs3"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="" /></div>
+            <div class="cs-card cs4"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="" /></div>
+            <div class="cs-card cs5"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" /></div>
+          </div>
         </div>
         <!-- Face up (content) -->
         <div class="flip-face flip-front shift-front" id="techContent"></div>
