@@ -111,6 +111,7 @@
     .flip-wrap.clickable .flip-inner{transition:transform .72s cubic-bezier(.4,0,.2,1)}
     .flip-wrap.clickable .flip-inner.flipped{transform:rotateY(180deg)!important}
     .click-hint{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-size:.72rem;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;pointer-events:none;white-space:nowrap;z-index:2}
+    .flip-wrap.clickable{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 
     /* face-down placeholders */
     .placeholder-back{display:flex;align-items:center;justify-content:center;height:100%;border:2px dashed var(--border);border-radius:20px;flex-direction:column;gap:.75rem;color:var(--gray-700)}
@@ -166,15 +167,83 @@
     .section-z{position:relative;z-index:1}
 
     /* ── RESPONSIVE ── */
+
+    /* Tablet */
     @media(max-width:900px){
-      .decks-row,.active-area{grid-template-columns:1fr}
-      .flip-wrap{aspect-ratio:5/7;height:auto}
-      .instructions{grid-template-columns:1fr}
+      .instructions{grid-template-columns:1fr 1fr}
+      .active-area{grid-template-columns:1fr 1fr}
+      .decks-row{grid-template-columns:1fr 1fr}
     }
+
+    /* Mobile nav */
     @media(max-width:768px){
       .mobile-toggle{display:flex}
-      .nav-links{position:fixed;top:0;right:-100%;width:80%;height:100vh;background:var(--gray-900);flex-direction:column;padding:5rem 2rem;gap:2rem;transition:right .3s ease}
+      .nav-links{position:fixed;top:0;right:-100%;width:82%;max-width:320px;height:100vh;background:var(--gray-900);flex-direction:column;padding:5rem 2rem;gap:2rem;transition:right .3s ease;z-index:999;box-shadow:-8px 0 32px rgba(0,0,0,.5)}
       .nav-links.active{right:0}
+    }
+
+    /* Mobile */
+    @media(max-width:640px){
+      /* Hero */
+      .game-hero{padding:calc(4.5rem + env(safe-area-inset-top)) 5% 2rem}
+      .game-hero h1{font-size:clamp(1.9rem,8vw,2.6rem);letter-spacing:-1px}
+      .game-hero p{font-size:.95rem}
+      .hero-badge{font-size:.7rem;padding:.35rem .85rem}
+
+      /* Instructions */
+      .instructions-wrap{padding:1.5rem 5% 0}
+      .instructions{grid-template-columns:1fr;max-width:380px;margin:0 auto}
+      .instruction-step{padding:1rem}
+
+      /* Board */
+      .game-board{padding:1.5rem 4% 5rem}
+      .round-bar{gap:.6rem;font-size:.78rem;flex-wrap:wrap;justify-content:center}
+
+      /* Decks — keep side by side but compact */
+      .decks-row{grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+      .deck-zone{padding:1rem .75rem;gap:.6rem;border-radius:16px}
+      .deck-eyebrow{font-size:.65rem;letter-spacing:1.5px}
+      .deck-title{font-size:.9rem}
+      .deck-sub{font-size:.7rem}
+      .deck-stack{width:80px;height:115px}
+      .stack-card{width:68px;height:104px;border-radius:8px}
+      .stack-card img{border-radius:8px}
+      .deck-progress-label{font-size:.68rem}
+      .deck-counter{font-size:.72rem}
+
+      /* Active cards — stack vertically, centered */
+      .active-area{grid-template-columns:1fr;gap:1.25rem}
+      .flip-wrap{max-width:300px;margin:0 auto;width:100%}
+      .card-body p{font-size:1.1rem;line-height:1.6}
+      .card-header{padding:.85rem 1.1rem}
+      .card-footer{padding:.6rem 1rem}
+      .click-hint{font-size:.7rem;bottom:.75rem}
+
+      /* Apply prompt */
+      .apply-prompt{padding:1.1rem 1.25rem}
+      .apply-prompt h3{font-size:1rem}
+      .apply-prompt p{font-size:.85rem}
+
+      /* Controls */
+      .controls{flex-direction:column;align-items:stretch;gap:.75rem;padding:0 1rem}
+      .ctrl-btn{width:100%;justify-content:center;padding:.85rem 1rem}
+    }
+
+    /* Very small phones */
+    @media(max-width:380px){
+      .decks-row{gap:.5rem}
+      .deck-zone{padding:.75rem .6rem}
+      .deck-stack{width:70px;height:100px}
+      .stack-card{width:60px;height:90px}
+      .flip-wrap{max-width:260px}
+      .card-body p{font-size:1rem}
+    }
+
+    /* Landscape mobile */
+    @media(max-height:500px) and (orientation:landscape){
+      .game-hero{padding:4.5rem 5% 1.5rem}
+      .active-area{grid-template-columns:1fr 1fr}
+      .flip-wrap{max-width:100%;margin:0}
     }
   </style>
 </head>
@@ -576,6 +645,11 @@ document.getElementById('mobileToggle').addEventListener('click',()=>{
   const open=document.getElementById('mobileToggle').getAttribute('aria-expanded')==='true';
   document.getElementById('mobileToggle').setAttribute('aria-expanded',String(!open));
 });
+
+// Detect touch device and update hints
+const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+const hintText = isTouch ? '👆 Tap to flip' : '👆 Click to flip';
+document.querySelectorAll('.click-hint').forEach(el => el.textContent = hintText);
 
 // Keyboard support on clickable cards
 document.getElementById('scenFlipWrap').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')drawScenario();});
