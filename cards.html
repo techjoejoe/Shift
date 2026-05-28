@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SHIFT Card Game – Leadership Coaching</title>
+  <meta name="description" content="The SHIFT Leadership Card Game — draw a scenario and a coaching technique, then apply the SHIFT framework to lead better." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757000236/20250728_2040_3D_Pixar_Logo_remix_01k19xa7z0e18bsmxtjw7cc07p_1_pjwgsv.png" type="image/png" sizes="32x32" />
+  <style>
+    :root {
+      --primary:#FF6B35;--primary-dark:#E55A2B;--secondary:#F7931E;
+      --dark:#0F0F0F;--gray-900:#1A1A1A;--gray-800:#2A2A2A;--gray-700:#3A3A3A;
+      --gray-600:#4A4A4A;--gray-500:#6A6A6A;--gray-400:#8A8A8A;--gray-300:#AAAAAA;
+      --gray-200:#CACACA;--gray-100:#EAEAEA;--white:#FFFFFF;
+      --gradient:linear-gradient(135deg,#FF6B35 0%,#F7931E 100%);
+      --card-bg:rgba(255,255,255,.03);--border:rgba(255,255,255,.08);
+      --s-color:#FF6B35;--h-color:#3B82F6;--i-color:#10B981;--f-color:#8B5CF6;--t-color:#F59E0B;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden;line-height:1.6}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;width:100%;padding:1.25rem 5%;background:rgba(15,15,15,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:1000;transition:all .3s}
+    nav.scrolled{padding:.85rem 5%;background:rgba(15,15,15,.97)}
+    .nav-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .logo img{height:40px;width:auto}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+    .nav-links a{color:var(--gray-300);text-decoration:none;font-size:.95rem;font-weight:600;transition:color .2s}
+    .nav-links a:hover{color:var(--white)}
+    .nav-cta{background:var(--primary);color:var(--white)!important;padding:.55rem 1.2rem;border-radius:8px}
+    .nav-active{color:var(--primary)!important}
+    .mobile-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none}
+    .mobile-toggle span{width:25px;height:2px;background:var(--white);display:block}
+
+    /* ── HERO ── */
+    .game-hero{padding:7rem 5% 3.5rem;background:radial-gradient(ellipse at top,var(--gray-900) 0%,var(--dark) 100%);text-align:center;position:relative;overflow:hidden}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,107,53,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,53,.08) 1px,transparent 1px);background-size:50px 50px;opacity:.3}
+    .game-hero-content{position:relative;z-index:1}
+    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);border-radius:999px;padding:.4rem 1.1rem;margin-bottom:1.25rem;font-size:.78rem;font-weight:800;letter-spacing:1.5px;color:var(--primary);text-transform:uppercase}
+    .game-hero h1{font-size:clamp(2.5rem,6vw,4.25rem);font-weight:900;letter-spacing:-2px;margin-bottom:.85rem}
+    .game-hero h1 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .game-hero p{font-size:1.1rem;color:var(--gray-300);max-width:580px;margin:0 auto}
+
+    /* ── INSTRUCTIONS ── */
+    .instructions-wrap{padding:2.5rem 5% 0;max-width:1000px;margin:0 auto}
+    .instructions{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .instruction-step{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.4rem;text-align:center;transition:border-color .3s}
+    .instruction-step:hover{border-color:var(--primary)}
+    .step-num{width:38px;height:38px;background:var(--gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem;margin:0 auto .7rem;box-shadow:0 6px 18px rgba(255,107,53,.3)}
+    .instruction-step h3{font-size:.9rem;font-weight:800;margin-bottom:.35rem}
+    .instruction-step p{font-size:.82rem;color:var(--gray-400);line-height:1.55}
+
+    /* ── GAME BOARD ── */
+    .game-board{padding:2rem 5% 5rem;max-width:1200px;margin:0 auto}
+
+    /* round counter */
+    .round-bar{display:flex;justify-content:center;align-items:center;gap:1.5rem;margin-bottom:2rem;font-size:.85rem;color:var(--gray-500);font-weight:600;flex-wrap:wrap}
+    .round-bar strong{color:var(--gray-200)}
+    .round-badge{background:var(--card-bg);border:1px solid var(--border);border-radius:999px;padding:.35rem 1rem;font-size:.8rem;font-weight:800;color:var(--primary)}
+
+    /* ── DECKS ROW ── */
+    .decks-row{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem}
+    .deck-zone{background:var(--card-bg);border:1px solid var(--border);border-radius:24px;padding:1.75rem;display:flex;flex-direction:column;align-items:center;gap:1rem;transition:border-color .3s}
+    .deck-zone:hover{border-color:rgba(255,107,53,.3)}
+
+    .deck-eyebrow{font-size:.72rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--primary)}
+    .deck-title{font-size:1.15rem;font-weight:800}
+    .deck-sub{font-size:.82rem;color:var(--gray-400);text-align:center}
+
+    /* stacked visual */
+    .deck-stack{position:relative;width:130px;height:190px;cursor:pointer}
+    .stack-card{position:absolute;width:110px;height:170px;border-radius:12px;left:50%;top:50%;overflow:hidden}
+    .stack-card:nth-child(1){transform:translate(-50%,-50%) rotate(-5deg);z-index:1;opacity:.7}
+    .stack-card:nth-child(2){transform:translate(-50%,-50%) rotate(-2.5deg);z-index:2;opacity:.8}
+    .stack-card:nth-child(3){transform:translate(-50%,-50%) rotate(0deg);z-index:3;opacity:.9}
+    .stack-card:nth-child(4){transform:translate(-50%,-50%) rotate(2.5deg);z-index:4;opacity:.95}
+    .stack-card:nth-child(5){transform:translate(-50%,-50%) rotate(0deg);z-index:5}
+    .stack-card img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
+
+    /* progress */
+    .deck-progress-wrap{width:100%;display:flex;flex-direction:column;gap:.35rem}
+    .deck-progress-label{display:flex;justify-content:space-between;font-size:.75rem;color:var(--gray-500)}
+    .progress-bar{width:100%;height:5px;background:var(--gray-800);border-radius:3px;overflow:hidden}
+    .progress-fill{height:100%;border-radius:3px;transition:width .5s ease}
+    .pf-scenario{background:linear-gradient(90deg,#FF6B35,#F7931E)}
+    .pf-shift{background:linear-gradient(90deg,#FF6B35,#F7931E)}
+
+    /* draw button */
+    .draw-btn{width:100%;padding:.85rem 1.5rem;border-radius:12px;font-weight:800;font-size:.9rem;border:none;cursor:pointer;transition:all .2s ease;display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--gradient);color:#fff;box-shadow:0 8px 24px rgba(255,107,53,.28)}
+    .draw-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,107,53,.4)}
+    .draw-btn:active:not(:disabled){transform:translateY(0)}
+    .draw-btn:disabled{opacity:.35;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+    .deck-counter{font-size:.78rem;color:var(--gray-500);font-weight:600}
+
+    /* ── ACTIVE CARDS ── */
+    .active-area{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
+
+    /* flip container */
+    .flip-wrap{perspective:1200px;width:100%;aspect-ratio:5/7;height:auto}
+    .flip-inner{width:100%;height:100%;transform-style:preserve-3d;transition:transform .72s cubic-bezier(.4,0,.2,1);position:relative}
+    .flip-inner.flipped{transform:rotateY(180deg)}
+    .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;overflow:hidden}
+    .flip-back{/* default shown = card face-down */}
+    .flip-front{transform:rotateY(180deg)}
+
+    /* face-down placeholders */
+    .placeholder-back{display:flex;align-items:center;justify-content:center;height:100%;border:2px dashed var(--border);border-radius:20px;flex-direction:column;gap:.75rem;color:var(--gray-700)}
+    .placeholder-back .ph-icon{font-size:2.8rem;opacity:.3}
+    .placeholder-back p{font-size:.82rem;color:var(--gray-600)}
+
+    /* card backs (image fill) */
+    .cardback-img{width:100%;height:100%;object-fit:cover;display:block;border-radius:20px}
+
+    /* ── SHARED card styles (both decks) ── */
+    .card-header{background:var(--gradient);padding:1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+    .card-header-left{display:flex;align-items:center;gap:.65rem}
+    .card-tag{font-size:.72rem;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.9);text-transform:uppercase}
+    .card-num{font-size:.8rem;font-weight:700;color:rgba(255,255,255,.65)}
+    .card-body{flex:1;padding:1.75rem 1.6rem;display:flex;align-items:center;justify-content:center}
+    .card-body p{font-size:1.25rem;line-height:1.7;color:var(--gray-100);font-weight:500;text-align:center}
+    .card-footer{padding:.75rem 1.4rem;border-top:1px solid var(--border);text-align:center;flex-shrink:0}
+    .card-footer span{font-size:.62rem;font-weight:700;letter-spacing:2px;color:var(--gray-600);text-transform:uppercase}
+
+    /* Scenario card front */
+    .scenario-front{background:var(--gray-900);border:1px solid rgba(255,107,53,.25);display:flex;flex-direction:column;height:100%}
+
+    /* SHIFT card front */
+    .shift-front{background:var(--gray-900);display:flex;flex-direction:column;height:100%;border:1px solid rgba(255,107,53,.25)}
+    .sh-letter{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;flex-shrink:0}
+    .sh-phase{font-size:.68rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.8)}
+    .sh-name{font-size:1rem;font-weight:900;color:#fff;margin-top:.1rem}
+
+    /* ── APPLY PROMPT ── */
+    .apply-prompt{display:none;background:var(--card-bg);border:1px solid rgba(255,107,53,.25);border-radius:18px;padding:1.5rem 2rem;text-align:center;margin-bottom:1.75rem;animation:fadeUp .4s ease}
+    .apply-prompt.show{display:block}
+    .apply-prompt h3{font-size:1.15rem;font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+    .apply-prompt p{color:var(--gray-400);font-size:.9rem}
+    .apply-prompt strong{color:var(--white)}
+
+    /* ── CONTROLS ── */
+    .controls{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .ctrl-btn{padding:.85rem 2rem;border-radius:12px;font-weight:800;font-size:.9rem;border:none;cursor:pointer;display:flex;align-items:center;gap:.5rem;transition:all .2s}
+    .ctrl-btn:hover{transform:translateY(-2px)}
+    .btn-newround{background:var(--gradient);color:#fff;box-shadow:0 8px 24px rgba(255,107,53,.3)}
+    .btn-shuffle{background:var(--card-bg);color:var(--white);border:1px solid var(--border)}
+    .btn-shuffle:hover{border-color:var(--primary)}
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ── FOOTER ── */
+    footer{text-align:center;padding:2rem;color:var(--gray-600);font-size:.8rem;border-top:1px solid var(--border)}
+    footer a{color:var(--primary);text-decoration:none}
+
+    /* ── PARTICLES ── */
+    #particleCanvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+    .section-z{position:relative;z-index:1}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .decks-row,.active-area{grid-template-columns:1fr}
+      .flip-wrap{aspect-ratio:5/7;height:auto}
+      .instructions{grid-template-columns:1fr}
+    }
+    @media(max-width:768px){
+      .mobile-toggle{display:flex}
+      .nav-links{position:fixed;top:0;right:-100%;width:80%;height:100vh;background:var(--gray-900);flex-direction:column;padding:5rem 2rem;gap:2rem;transition:right .3s ease}
+      .nav-links.active{right:0}
+    }
+  </style>
+</head>
+<body>
+<canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+<!-- NAV -->
+<nav id="navbar" aria-label="Primary">
+  <div class="nav-container">
+    <a href="index.html" class="logo" aria-label="SHIFT Coaching home">
+      <img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757102793/LeadingNowLogoWhite_hz6m1g.png" width="160" height="40" alt="Leading Now logo" />
+    </a>
+    <ul class="nav-links" id="navLinks" role="menu">
+      <li role="none"><a role="menuitem" href="index.html#framework">Framework</a></li>
+      <li role="none"><a role="menuitem" href="index.html#podcast">Podcast</a></li>
+      <li role="none"><a role="menuitem" href="index.html#resources">Resources</a></li>
+      <li role="none"><a role="menuitem" href="index.html#ai">AI Coach</a></li>
+      <li role="none"><a role="menuitem" class="nav-active" href="cards.html">🃏 Card Game</a></li>
+    </ul>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="game-hero section-z">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="game-hero-content">
+    <div class="hero-badge">🃏 Interactive Training Game</div>
+    <h1>The <span>SHIFT</span> Card Game</h1>
+    <p>Draw a real leadership scenario and a SHIFT card, then apply the framework to coach your way through it.</p>
+  </div>
+</section>
+
+<!-- INSTRUCTIONS -->
+<div class="instructions-wrap section-z">
+  <div class="instructions">
+    <div class="instruction-step">
+      <div class="step-num">1</div>
+      <h3>Draw a Scenario</h3>
+      <p>Flip a card to reveal a real leadership challenge you might face as a manager.</p>
+    </div>
+    <div class="instruction-step">
+      <div class="step-num">2</div>
+      <h3>Draw a SHIFT Card</h3>
+      <p>Reveal a SHIFT coaching card from the framework toolkit.</p>
+    </div>
+    <div class="instruction-step">
+      <div class="step-num">3</div>
+      <h3>Apply &amp; Discuss</h3>
+      <p>How would you use this SHIFT card to handle the scenario? Coach your way through it!</p>
+    </div>
+  </div>
+</div>
+
+<!-- GAME BOARD -->
+<div class="game-board section-z">
+
+  <!-- Round bar -->
+  <div class="round-bar">
+    <span class="round-badge" id="roundBadge">Round —</span>
+    <span>Scenarios left: <strong id="scenLeft">50</strong></span>
+    <span>SHIFT cards left: <strong id="techLeft">50</strong></span>
+  </div>
+
+  <!-- Decks -->
+  <div class="decks-row">
+
+    <!-- Scenario Deck -->
+    <div class="deck-zone">
+      <div class="deck-eyebrow">Deck 1</div>
+      <div class="deck-title">Scenario Cards</div>
+      <div class="deck-sub">50 real leadership situations</div>
+
+      <div class="deck-stack" id="scenStack" onclick="drawScenario()" role="button" aria-label="Draw Scenario card" tabindex="0">
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" /></div>
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" /></div>
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" /></div>
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" /></div>
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" /></div>
+      </div>
+
+      <div class="deck-progress-wrap">
+        <div class="deck-progress-label"><span>Progress</span><span id="scenPct">0 drawn</span></div>
+        <div class="progress-bar"><div class="progress-fill pf-scenario" id="scenBar" style="width:100%"></div></div>
+      </div>
+
+      <button class="draw-btn" id="scenBtn" onclick="drawScenario()">🎭 Draw Scenario</button>
+      <div class="deck-counter" id="scenCounter">50 cards remaining</div>
+    </div>
+
+    <!-- SHIFT Technique Deck -->
+    <div class="deck-zone">
+      <div class="deck-eyebrow">Deck 2</div>
+      <div class="deck-title">SHIFT Cards</div>
+      <div class="deck-sub">50 coaching cards</div>
+
+      <div class="deck-stack" id="techStack" onclick="drawTech()" role="button" aria-label="Draw SHIFT card" tabindex="0">
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" /></div>
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" /></div>
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" /></div>
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" /></div>
+        <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" /></div>
+      </div>
+
+      <div class="deck-progress-wrap">
+        <div class="deck-progress-label"><span>Progress</span><span id="techPct">0 drawn</span></div>
+        <div class="progress-bar"><div class="progress-fill pf-shift" id="techBar" style="width:100%"></div></div>
+      </div>
+
+      <button class="draw-btn" id="techBtn" onclick="drawTech()">⚡ Draw SHIFT</button>
+      <div class="deck-counter" id="techCounter">50 cards remaining</div>
+    </div>
+  </div>
+
+  <!-- Active Cards -->
+  <div class="active-area">
+
+    <!-- Drawn Scenario -->
+    <div class="flip-wrap">
+      <div class="flip-inner" id="scenInner">
+        <!-- Face down -->
+        <div class="flip-face flip-back">
+          <img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" />
+        </div>
+        <!-- Face up (content) -->
+        <div class="flip-face flip-front scenario-front" id="scenContent"></div>
+      </div>
+    </div>
+
+    <!-- Drawn Technique -->
+    <div class="flip-wrap">
+      <div class="flip-inner" id="techInner">
+        <!-- Face down -->
+        <div class="flip-face flip-back">
+          <img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" />
+        </div>
+        <!-- Face up (content) -->
+        <div class="flip-face flip-front shift-front" id="techContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apply Prompt -->
+  <div class="apply-prompt" id="applyPrompt">
+    <h3>🚀 Now Apply It!</h3>
+    <p>Use the <strong id="promptTech"></strong> card to coach through this scenario. What would you say first?</p>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="ctrl-btn btn-newround" id="newRoundBtn" onclick="newRound()">🔄 New Round</button>
+    <button class="ctrl-btn btn-shuffle" onclick="shuffleReset()">🔀 Shuffle &amp; Reset All</button>
+  </div>
+
+</div><!-- /game-board -->
+
+<footer>
+  <p>The SHIFT Card Game &nbsp;·&nbsp; <a href="index.html">← Back to SHIFT Coaching</a> &nbsp;·&nbsp; <a href="https://shiftyourcoaching.com/" target="_blank" rel="noopener">shiftyourcoaching.com</a></p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════
+//  CARD DATA
+// ═══════════════════════════════════════
+
+const SCENARIOS = [
+  "A direct report has been missing deadlines consistently for the last 3 weeks but always has a reason ready.",
+  "A team member was passed over for promotion and you need to have a coaching conversation about it.",
+  "One of your direct reports handled a client escalation poorly and damaged the relationship.",
+  "Your employee keeps overpromising to clients and underdelivering, and it is becoming a pattern.",
+  "A high performer has started showing up disengaged and the quality of their work has slipped noticeably.",
+  "An employee received a written warning and you need to follow up with a coaching conversation.",
+  "Your team is being restructured and one employee is clearly anxious about their future role and the company.",
+  "Leadership has changed a key process and one of your team members is visibly resistant to it.",
+  "A direct report is being considered for a stretch assignment they did not ask for.",
+  "Your team just went through a rough quarter and morale is low across the board.",
+  "A direct report comes to you clearly frustrated but keeps saying they are fine.",
+  "An employee gives a long, rambling explanation of why a project went off track.",
+  "A team member complains that a client just does not get it and keeps venting about the situation.",
+  "During a coaching conversation, an employee says something you strongly disagree with.",
+  "An employee says they feel unsupported by the team but cannot explain exactly why.",
+  "A quiet team member rarely speaks up in meetings but comes to you privately to share a concern that could have been more effectively raised in the group.",
+  "Your employee has just been told their role is changing significantly and they are talking fast and jumping between topics.",
+  "A direct report shares that they are struggling personally and it is starting to affect their work.",
+  "An employee pushes back hard on feedback you just gave them and your instinct is to defend your position.",
+  "You are mid-coaching session and realize you have been half-listening and missed something important.",
+  "A direct report keeps coming to you with every small problem instead of attempting to solve things themselves.",
+  "An employee says 'just tell me what to do' when faced with a difficult decision.",
+  "A team member blames a client entirely for a project failure and takes no responsibility for their part.",
+  "An employee is clearly capable of more but consistently plays it safe and stays in their comfort zone.",
+  "A direct report is dealing with a performance issue for the second time after previously committing to change.",
+  "Your employee shares great ideas in one-on-ones but never speaks up or takes initiative in team settings.",
+  "A team member is openly resistant to a new process change.",
+  "An employee is frustrated about their career growth but has not taken a single step to move it forward.",
+  "A direct report handled a client issue in a new way that worked really well but seems unaware of why.",
+  "Your team is going through significant change and one employee keeps waiting to be told what to do next.",
+  "After a long coaching conversation, both of you have talked through a lot but nothing concrete has been agreed on.",
+  "An employee agrees to improve their communication with clients but the commitment is vague and hard to measure.",
+  "A direct report has identified three development areas they want to work on simultaneously.",
+  "An employee leaves coaching conversations motivated but has a track record of not following through on commitments.",
+  "You and your employee just agreed on a development plan but neither of you has documented it.",
+  "A team member's action plan depends entirely on getting cooperation from another department they have no influence over.",
+  "After a coaching conversation about a performance issue, the employee seems to understand but is vague about what they will do differently.",
+  "An employee wants to take on a new client-facing stretch project but has no clear plan for how to approach it.",
+  "Your employee is overwhelmed by a big goal and cannot see a manageable path forward.",
+  "A coaching conversation has surfaced four or five real issues at once and the employee does not know where to start.",
+  "You had a strong coaching conversation two weeks ago but they have not followed up and the employee's behavior has not changed.",
+  "A direct report made solid progress on a development goal last month but has completely stalled since then.",
+  "An employee hit a goal you set together and you never acknowledged it or followed up on it.",
+  "You have been stretched thin and your one-on-ones have been skipped for a full month while an employee's performance slips.",
+  "A direct report insists they have been doing everything you agreed on, but you have seen no real change in their client interactions.",
+  "The employee tells you in a check-in that the action plan you built together simply is not working for them.",
+  "A team member is discouraged because their progress on a significant goal feels painfully slow.",
+  "You notice an employee has quietly made meaningful improvements over the past month and no one has acknowledged it.",
+  "An employee navigating a major change has had an uneven journey — strong weeks followed by real setbacks.",
+  "You are about to transition one of your direct reports to a new manager and there is no formal handoff plan."
+];
+
+const TECHNIQUES = [
+  // S – Set Context
+  {letter:'S',phase:'Set Context',name:'Scene Setter',how:'Open by describing the situation clearly and objectively before the employee responds.'},
+  {letter:'S',phase:'Set Context',name:'Purpose Framer',how:'State the reason for the coaching conversation upfront so the employee knows what to expect.'},
+  {letter:'S',phase:'Set Context',name:'Facts First',how:'Anchor the conversation to observable behaviors or data, not opinions or assumptions.'},
+  {letter:'S',phase:'Set Context',name:'Stakes Clarifier',how:'Name why this situation matters — to the employee, the team, or the business.'},
+  {letter:'S',phase:'Set Context',name:'Assumption Cracker',how:'Pause and separate what you know for certain from what you are assuming to be true.'},
+  {letter:'S',phase:'Set Context',name:'Neutral Opener',how:'Start with a non-threatening question that invites the employee into the conversation.'},
+  {letter:'S',phase:'Set Context',name:'Shared Reality Builder',how:'Ensure that both you and the employee are looking at the same situation before moving on.'},
+  {letter:'S',phase:'Set Context',name:'Context Bridge',how:"Connect today's coaching conversation to a broader goal or previous discussion."},
+  {letter:'S',phase:'Set Context',name:'Tone Calibrator',how:'Set a tone that is honest and caring — firm enough to be clear, warm enough to be safe.'},
+  {letter:'S',phase:'Set Context',name:'Readiness Reader',how:'Gauge whether the employee is emotionally ready to engage before diving in.'},
+  // H – Hear Fully
+  {letter:'H',phase:'Hear Fully',name:'Active Listener',how:'Give full, undivided attention — no phone, no laptop, no fact-checking.'},
+  {letter:'H',phase:'Hear Fully',name:'Silence Holder',how:'Resist the urge to fill pauses. Let the employee think and finish their thought fully.'},
+  {letter:'H',phase:'Hear Fully',name:'Reflective Paraphraser',how:'Repeat back what you heard in your own words to confirm your understanding is accurate.'},
+  {letter:'H',phase:'Hear Fully',name:'Emotion Namer',how:'Acknowledge the feeling behind what the employee is saying before addressing the content.'},
+  {letter:'H',phase:'Hear Fully',name:'Curiosity Questioner',how:'Ask open-ended questions that invite the employee to share more, not just confirm what you think.'},
+  {letter:'H',phase:'Hear Fully',name:'Non-Verbal Reader',how:'Pay attention to tone, body language, and energy, not just the words being spoken.'},
+  {letter:'H',phase:'Hear Fully',name:'Assumption Suspender',how:'Actively set aside your own interpretation and listen without an agenda.'},
+  {letter:'H',phase:'Hear Fully',name:'Story Finder',how:'Invite the employee to walk you through what happened from their own point of view.'},
+  {letter:'H',phase:'Hear Fully',name:'Bias Checker',how:'Notice if your personal reactions are shaping what you are hearing and recalibrate.'},
+  {letter:'H',phase:'Hear Fully',name:'Full Picture Seeker',how:'Ask follow-up questions until you feel confident you understand the complete situation.'},
+  // I – Invite Ownership
+  {letter:'I',phase:'Invite Ownership',name:'Question Over Answer',how:'Ask the employee what they think the solution is before offering your own.'},
+  {letter:'I',phase:'Invite Ownership',name:'Strength Spotter',how:'Point to a specific capability the employee already has that applies to this challenge.'},
+  {letter:'I',phase:'Invite Ownership',name:'Choice Creator',how:'Identify together what few different options are to move forward.'},
+  {letter:'I',phase:'Invite Ownership',name:'Empowerment Affirmation',how:'Explicitly tell the employee you believe they are capable of owning this situation.'},
+  {letter:'I',phase:'Invite Ownership',name:'Reflection Prompt',how:'Ask the employee what they would do differently if they could go back and handle it again.'},
+  {letter:'I',phase:'Invite Ownership',name:'Obstacle Asker',how:'Name the barriers the employee sees so they can begin solving them independently.'},
+  {letter:'I',phase:'Invite Ownership',name:'Role Clarifier',how:'Be clear about what the employee owns versus what you as the manager will handle.'},
+  {letter:'I',phase:'Invite Ownership',name:'Idea Drawer',how:"Use questions like 'What options haven't we considered yet?' to unlock new thinking."},
+  {letter:'I',phase:'Invite Ownership',name:'Accountability Mirror',how:'Ask the employee to describe what success looks like in their own words.'},
+  {letter:'I',phase:'Invite Ownership',name:'Energy Tapper',how:'Connect the challenge to something the employee genuinely cares about to fuel motivation.'},
+  // F – Frame Actions
+  {letter:'F',phase:'Frame Actions',name:'Next Step Namer',how:'End the conversation by naming one clear, specific action the employee will take first.'},
+  {letter:'F',phase:'Frame Actions',name:'Deadline Setter',how:'Attach a realistic timeline to every action so there is no ambiguity about when it happens.'},
+  {letter:'F',phase:'Frame Actions',name:'Who Does What',how:'Clarify which actions belong to the employee and which belong to you.'},
+  {letter:'F',phase:'Frame Actions',name:'Written Confirmer',how:'Summarize the agreed actions in writing so both parties leave with the same understanding.'},
+  {letter:'F',phase:'Frame Actions',name:'Success Definer',how:'Ask the employee to describe what a successful outcome looks like before the conversation ends.'},
+  {letter:'F',phase:'Frame Actions',name:'Small Win Designer',how:'Break a big action into smaller steps so the employee can build momentum quickly.'},
+  {letter:'F',phase:'Frame Actions',name:'Resource Identifier',how:'Ask the employee what support, tools, or information they need to execute the plan.'},
+  {letter:'F',phase:'Frame Actions',name:'Commitment Asker',how:'Gain a clear, stated commitment to the agreed-upon next steps.'},
+  {letter:'F',phase:'Frame Actions',name:'Priority Ranker',how:'If there are multiple actions, help the employee rank them so they know where to start.'},
+  {letter:'F',phase:'Frame Actions',name:'Contingency Planner',how:'Ask the employee what they will do if their first approach does not work as expected.'},
+  // T – Track Progress
+  {letter:'T',phase:'Track Progress',name:'Checkpoint Scheduler',how:'Set a specific date and time for a follow-up before the employee walks out the door.'},
+  {letter:'T',phase:'Track Progress',name:'Milestone Marker',how:'Define measurable progress points so both parties know what progress looks like.'},
+  {letter:'T',phase:'Track Progress',name:'Celebration Noticer',how:'Acknowledge and name progress out loud when the employee follows through on commitments.'},
+  {letter:'T',phase:'Track Progress',name:'Obstacle Anticipator',how:'Ask the employee in advance what might get in the way of their progress.'},
+  {letter:'T',phase:'Track Progress',name:'Course Corrector',how:'When progress stalls, revisit the plan with curiosity rather than frustration.'},
+  {letter:'T',phase:'Track Progress',name:'Consistency Keeper',how:'Follow through on your own commitments so the employee trusts the coaching relationship.'},
+  {letter:'T',phase:'Track Progress',name:'Feedback Responder',how:'Ask the employee how the coaching itself is working and what would make it more helpful.'},
+  {letter:'T',phase:'Track Progress',name:'Progress Documenter',how:'Keep a brief record of what was agreed and what progress has been made over time.'},
+  {letter:'T',phase:'Track Progress',name:'Re-Energizer',how:'When motivation dips, reconnect the employee to the original reason this goal matters.'},
+  {letter:'T',phase:'Track Progress',name:'Loop Closer',how:'Formally close out a coaching thread by acknowledging the growth that has occurred.'}
+];
+
+const COLORS = {
+  S:{bg:'linear-gradient(135deg,#FF6B35,#E55A2B)',text:'#FF6B35',border:'rgba(255,107,53,.3)',glow:'rgba(255,107,53,.12)'},
+  H:{bg:'linear-gradient(135deg,#3B82F6,#1D4ED8)',text:'#3B82F6',border:'rgba(59,130,246,.3)',glow:'rgba(59,130,246,.12)'},
+  I:{bg:'linear-gradient(135deg,#10B981,#059669)',text:'#10B981',border:'rgba(16,185,129,.3)',glow:'rgba(16,185,129,.12)'},
+  F:{bg:'linear-gradient(135deg,#8B5CF6,#7C3AED)',text:'#8B5CF6',border:'rgba(139,92,246,.3)',glow:'rgba(139,92,246,.12)'},
+  T:{bg:'linear-gradient(135deg,#F59E0B,#D97706)',text:'#F59E0B',border:'rgba(245,158,11,.3)',glow:'rgba(245,158,11,.12)'}
+};
+
+// ═══════════════════════════════════════
+//  GAME STATE
+// ═══════════════════════════════════════
+let scenDeck=[], techDeck=[];
+let scenDrawn=false, techDrawn=false;
+let curScen=null, curTech=null;
+let round=0;
+
+function shuffle(arr){ return [...arr].sort(()=>Math.random()-.5); }
+
+function init(){
+  scenDeck = shuffle(SCENARIOS.map((t,i)=>({text:t,num:i+1})));
+  techDeck = shuffle(TECHNIQUES.map((c,i)=>({...c,num:i+1})));
+  scenDrawn=false; techDrawn=false; curScen=null; curTech=null; round=0;
+  document.getElementById('scenInner').classList.remove('flipped');
+  document.getElementById('techInner').classList.remove('flipped');
+  document.getElementById('applyPrompt').classList.remove('show');
+  document.getElementById('scenBtn').disabled=false;
+  document.getElementById('techBtn').disabled=false;
+  document.getElementById('scenStack').style.opacity='1';
+  document.getElementById('techStack').style.opacity='1';
+  updateUI();
+}
+
+function updateUI(){
+  const sl=scenDeck.length, tl=techDeck.length;
+  const sDrawn=50-sl, tDrawn=50-tl;
+  document.getElementById('scenLeft').textContent=sl;
+  document.getElementById('techLeft').textContent=tl;
+  document.getElementById('scenCounter').textContent=sl===0?'Deck exhausted 🏁':`${sl} card${sl!==1?'s':''} remaining`;
+  document.getElementById('techCounter').textContent=tl===0?'Deck exhausted 🏁':`${tl} card${tl!==1?'s':''} remaining`;
+  document.getElementById('scenPct').textContent=`${sDrawn} drawn`;
+  document.getElementById('techPct').textContent=`${tDrawn} drawn`;
+  document.getElementById('scenBar').style.width=`${(sl/50)*100}%`;
+  document.getElementById('techBar').style.width=`${(tl/50)*100}%`;
+  document.getElementById('roundBadge').textContent=round?`Round ${round}`:'Round —';
+  if(sl===0){document.getElementById('scenBtn').disabled=true;document.getElementById('scenStack').style.opacity='.25';}
+  if(tl===0){document.getElementById('techBtn').disabled=true;document.getElementById('techStack').style.opacity='.25';}
+}
+
+function drawScenario(){
+  if(scenDrawn||scenDeck.length===0) return;
+  curScen=scenDeck.pop();
+  const el=document.getElementById('scenContent');
+  el.innerHTML=`
+    <div class="card-header">
+      <div class="card-header-left">
+        <span style="font-size:1.15rem">🎭</span>
+        <span class="card-tag">Scenario</span>
+      </div>
+      <span class="card-num">#${curScen.num}</span>
+    </div>
+    <div class="card-body"><p>${curScen.text}</p></div>
+    <div class="card-footer"><span>SHIFT Coaching Card Game</span></div>
+  `;
+  requestAnimationFrame(()=>{ document.getElementById('scenInner').classList.add('flipped'); });
+  scenDrawn=true;
+  document.getElementById('scenBtn').disabled=true;
+  updateUI();
+  checkBoth();
+}
+
+function drawTech(){
+  if(techDrawn||techDeck.length===0) return;
+  curTech=techDeck.pop();
+  const c=COLORS[curTech.letter];
+  const el=document.getElementById('techContent');
+  el.style.borderColor='rgba(255,107,53,.25)';
+  el.innerHTML=`
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="sh-letter" style="background:${c.bg}">${curTech.letter}</div>
+        <div>
+          <div class="sh-phase">${curTech.phase}</div>
+          <div class="sh-name">${curTech.name}</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body"><p>${curTech.how}</p></div>
+    <div class="card-footer"><span>SHIFT Framework · ${curTech.phase}</span></div>
+  `;
+  requestAnimationFrame(()=>{ document.getElementById('techInner').classList.add('flipped'); });
+  techDrawn=true;
+  document.getElementById('techBtn').disabled=true;
+  updateUI();
+  checkBoth();
+}
+
+function checkBoth(){
+  if(scenDrawn&&techDrawn){
+    document.getElementById('promptTech').textContent=curTech.name;
+    document.getElementById('applyPrompt').classList.add('show');
+  }
+}
+
+function newRound(){
+  if(scenDeck.length===0&&techDeck.length===0){ shuffleReset(); return; }
+  round++;
+  scenDrawn=false; techDrawn=false;
+  document.getElementById('scenInner').classList.remove('flipped');
+  document.getElementById('techInner').classList.remove('flipped');
+  document.getElementById('applyPrompt').classList.remove('show');
+  if(scenDeck.length>0) document.getElementById('scenBtn').disabled=false;
+  if(techDeck.length>0) document.getElementById('techBtn').disabled=false;
+  updateUI();
+}
+
+function shuffleReset(){ init(); }
+
+// ── Nav ──
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50));
+document.getElementById('mobileToggle').addEventListener('click',()=>{
+  const nl=document.getElementById('navLinks');
+  nl.classList.toggle('active');
+  const open=document.getElementById('mobileToggle').getAttribute('aria-expanded')==='true';
+  document.getElementById('mobileToggle').setAttribute('aria-expanded',String(!open));
+});
+
+// Keyboard support on deck stacks
+document.getElementById('scenStack').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')drawScenario();});
+document.getElementById('techStack').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')drawTech();});
+
+// ── Particles ──
+(function(){
+  const canvas=document.getElementById('particleCanvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+  const COUNT=45;
+  const COLS=['rgba(255,107,53,','rgba(247,147,30,','rgba(255,140,80,'];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  function rnd(a,b){return a+Math.random()*(b-a);}
+  function mk(){return{x:rnd(0,W),y:rnd(0,H),r:rnd(1.5,4.5),sy:rnd(.2,.8),sx:rnd(-.2,.2),o:rnd(.07,.3),od:Math.random()>.5?1:-1,os:rnd(.002,.006),col:COLS[Math.floor(Math.random()*COLS.length)]};}
+  function boot(){resize();particles=Array.from({length:COUNT},mk);}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let p of particles){
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.shadowBlur=10;ctx.shadowColor=p.col+'0.5)';
+      ctx.fillStyle=p.col+p.o+')';ctx.fill();ctx.shadowBlur=0;
+      p.y-=p.sy;p.x+=p.sx;p.o+=p.od*p.os;
+      if(p.o>=.3)p.od=-1;if(p.o<=.04)p.od=1;
+      if(p.y<-10){p.y=H+10;p.x=rnd(0,W);}
+      if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  boot();draw();
+})();
+
+// ── Start ──
+init();
+</script>
+</body>
+</html>
