@@ -99,20 +99,39 @@
     /* ── ACTIVE CARDS ── */
     .active-area{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
 
-    /* flip container */
-    .flip-wrap{perspective:1200px;width:100%;aspect-ratio:5/7;height:auto}
-    .flip-inner{width:100%;height:100%;transform-style:preserve-3d;transition:transform .72s cubic-bezier(.4,0,.2,1);position:relative}
-    .flip-inner.flipped{transform:rotateY(180deg)}
-    .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;overflow:hidden}
-    .flip-back{/* default shown = card face-down */}
-    .flip-front{transform:rotateY(180deg)}
-    .flip-wrap.clickable{cursor:pointer}
-    .flip-wrap.clickable:hover .flip-inner:not(.flipped){transform:rotateY(8deg);transition:transform .2s ease}
+    /* flip container — full webkit prefix set for iOS Safari */
+    .flip-wrap{
+      perspective:1200px;-webkit-perspective:1200px;
+      width:100%;aspect-ratio:5/7;height:auto;
+    }
+    .flip-inner{
+      width:100%;height:100%;position:relative;
+      transform-style:preserve-3d;-webkit-transform-style:preserve-3d;
+      transition:transform .72s cubic-bezier(.4,0,.2,1);
+      -webkit-transition:-webkit-transform .72s cubic-bezier(.4,0,.2,1);
+    }
+    .flip-inner.flipped{
+      transform:rotateY(180deg);-webkit-transform:rotateY(180deg);
+    }
+    .flip-face{
+      position:absolute;inset:0;border-radius:20px;overflow:hidden;
+      backface-visibility:hidden;-webkit-backface-visibility:hidden;
+      transform:translateZ(0);-webkit-transform:translateZ(0); /* force GPU layer */
+    }
+    /* explicit rotateY(0) on back forces WebKit to honour backface-visibility */
+    .flip-back{transform:rotateY(0deg) translateZ(0);-webkit-transform:rotateY(0deg) translateZ(0)}
+    .flip-front{transform:rotateY(180deg) translateZ(0);-webkit-transform:rotateY(180deg) translateZ(0)}
+    /* hover tilt only on real pointer devices — never fires on touch */
+    @media(hover:hover) and (pointer:fine){
+      .flip-wrap.clickable:hover .flip-inner:not(.flipped){
+        transform:rotateY(8deg);-webkit-transform:rotateY(8deg);transition:transform .2s ease;
+      }
+    }
     .flip-wrap.clickable .flip-inner{transition:transform .72s cubic-bezier(.4,0,.2,1)}
-    .flip-wrap.clickable .flip-inner.flipped{transform:rotateY(180deg)!important}
+    .flip-wrap.clickable .flip-inner.flipped{transform:rotateY(180deg)!important;-webkit-transform:rotateY(180deg)!important}
     .click-hint{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-size:.72rem;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;pointer-events:none;white-space:nowrap;z-index:2;transition:opacity .3s ease}
     .flip-inner.flipped ~ .click-hint{opacity:0;pointer-events:none}
-    .flip-wrap.clickable{touch-action:manipulation;-webkit-tap-highlight-color:transparent;position:relative}
+    .flip-wrap.clickable{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;position:relative}
 
     /* ── CARD STACK VISUAL (face-down) ── */
     .card-stack-visual{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--dark)}
