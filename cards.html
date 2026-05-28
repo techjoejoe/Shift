@@ -106,6 +106,11 @@
     .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;overflow:hidden}
     .flip-back{/* default shown = card face-down */}
     .flip-front{transform:rotateY(180deg)}
+    .flip-wrap.clickable{cursor:pointer}
+    .flip-wrap.clickable:hover .flip-inner:not(.flipped){transform:rotateY(8deg);transition:transform .2s ease}
+    .flip-wrap.clickable .flip-inner{transition:transform .72s cubic-bezier(.4,0,.2,1)}
+    .flip-wrap.clickable .flip-inner.flipped{transform:rotateY(180deg)!important}
+    .click-hint{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-size:.72rem;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;pointer-events:none;white-space:nowrap;z-index:2}
 
     /* face-down placeholders */
     .placeholder-back{display:flex;align-items:center;justify-content:center;height:100%;border:2px dashed var(--border);border-radius:20px;flex-direction:column;gap:.75rem;color:var(--gray-700)}
@@ -245,7 +250,7 @@
       <div class="deck-title">Scenario Cards</div>
       <div class="deck-sub">50 real leadership situations</div>
 
-      <div class="deck-stack" id="scenStack" onclick="drawScenario()" role="button" aria-label="Draw Scenario card" tabindex="0">
+      <div class="deck-stack" id="scenStack" role="img" aria-label="Scenario card deck">
         <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" /></div>
         <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" /></div>
         <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" /></div>
@@ -258,7 +263,6 @@
         <div class="progress-bar"><div class="progress-fill pf-scenario" id="scenBar" style="width:100%"></div></div>
       </div>
 
-      <button class="draw-btn" id="scenBtn" onclick="drawScenario()">🎭 Draw Scenario</button>
       <div class="deck-counter" id="scenCounter">50 cards remaining</div>
     </div>
 
@@ -268,7 +272,7 @@
       <div class="deck-title">SHIFT Cards</div>
       <div class="deck-sub">50 coaching cards</div>
 
-      <div class="deck-stack" id="techStack" onclick="drawTech()" role="button" aria-label="Draw SHIFT card" tabindex="0">
+      <div class="deck-stack" id="techStack" role="img" aria-label="SHIFT card deck">
         <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" /></div>
         <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" /></div>
         <div class="stack-card"><img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" /></div>
@@ -281,7 +285,6 @@
         <div class="progress-bar"><div class="progress-fill pf-shift" id="techBar" style="width:100%"></div></div>
       </div>
 
-      <button class="draw-btn" id="techBtn" onclick="drawTech()">⚡ Draw SHIFT</button>
       <div class="deck-counter" id="techCounter">50 cards remaining</div>
     </div>
   </div>
@@ -290,23 +293,25 @@
   <div class="active-area">
 
     <!-- Drawn Scenario -->
-    <div class="flip-wrap">
+    <div class="flip-wrap clickable" id="scenFlipWrap" onclick="drawScenario()" role="button" tabindex="0" aria-label="Click to flip scenario card">
       <div class="flip-inner" id="scenInner">
         <!-- Face down -->
-        <div class="flip-face flip-back">
+        <div class="flip-face flip-back" style="position:relative">
           <img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/2_mh672f.png" alt="Scenario card back" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" />
+          <div class="click-hint">👆 Click to flip</div>
         </div>
         <!-- Face up (content) -->
         <div class="flip-face flip-front scenario-front" id="scenContent"></div>
       </div>
     </div>
 
-    <!-- Drawn Technique -->
-    <div class="flip-wrap">
+    <!-- Drawn SHIFT -->
+    <div class="flip-wrap clickable" id="techFlipWrap" onclick="drawTech()" role="button" tabindex="0" aria-label="Click to flip SHIFT card">
       <div class="flip-inner" id="techInner">
         <!-- Face down -->
-        <div class="flip-face flip-back">
+        <div class="flip-face flip-back" style="position:relative">
           <img src="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1779993813/1_ucaeom.png" alt="SHIFT card back" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" />
+          <div class="click-hint">👆 Click to flip</div>
         </div>
         <!-- Face up (content) -->
         <div class="flip-face flip-front shift-front" id="techContent"></div>
@@ -322,7 +327,7 @@
 
   <!-- Controls -->
   <div class="controls">
-    <button class="ctrl-btn btn-newround" id="newRoundBtn" onclick="newRound()">🔄 New Round</button>
+    <button class="ctrl-btn btn-newround" id="newRoundBtn" onclick="newRound()">🔄 Draw Again</button>
     <button class="ctrl-btn btn-shuffle" onclick="shuffleReset()">🔀 Shuffle &amp; Reset All</button>
   </div>
 
@@ -473,8 +478,6 @@ function init(){
   document.getElementById('scenInner').classList.remove('flipped');
   document.getElementById('techInner').classList.remove('flipped');
   document.getElementById('applyPrompt').classList.remove('show');
-  document.getElementById('scenBtn').disabled=false;
-  document.getElementById('techBtn').disabled=false;
   document.getElementById('scenStack').style.opacity='1';
   document.getElementById('techStack').style.opacity='1';
   updateUI();
@@ -492,8 +495,8 @@ function updateUI(){
   document.getElementById('scenBar').style.width=`${(sl/50)*100}%`;
   document.getElementById('techBar').style.width=`${(tl/50)*100}%`;
   document.getElementById('roundBadge').textContent=round?`Round ${round}`:'Round —';
-  if(sl===0){document.getElementById('scenBtn').disabled=true;document.getElementById('scenStack').style.opacity='.25';}
-  if(tl===0){document.getElementById('techBtn').disabled=true;document.getElementById('techStack').style.opacity='.25';}
+  if(sl===0){document.getElementById('scenFlipWrap').style.opacity='.25';document.getElementById('scenFlipWrap').style.pointerEvents='none';}
+  if(tl===0){document.getElementById('techFlipWrap').style.opacity='.25';document.getElementById('techFlipWrap').style.pointerEvents='none';}
 }
 
 function drawScenario(){
@@ -513,7 +516,7 @@ function drawScenario(){
   `;
   requestAnimationFrame(()=>{ document.getElementById('scenInner').classList.add('flipped'); });
   scenDrawn=true;
-  document.getElementById('scenBtn').disabled=true;
+  document.getElementById('scenFlipWrap').style.pointerEvents='none';
   updateUI();
   checkBoth();
 }
@@ -539,7 +542,7 @@ function drawTech(){
   `;
   requestAnimationFrame(()=>{ document.getElementById('techInner').classList.add('flipped'); });
   techDrawn=true;
-  document.getElementById('techBtn').disabled=true;
+  document.getElementById('techFlipWrap').style.pointerEvents='none';
   updateUI();
   checkBoth();
 }
@@ -558,8 +561,8 @@ function newRound(){
   document.getElementById('scenInner').classList.remove('flipped');
   document.getElementById('techInner').classList.remove('flipped');
   document.getElementById('applyPrompt').classList.remove('show');
-  if(scenDeck.length>0) document.getElementById('scenBtn').disabled=false;
-  if(techDeck.length>0) document.getElementById('techBtn').disabled=false;
+  if(scenDeck.length>0) document.getElementById('scenFlipWrap').style.pointerEvents='auto';
+  if(techDeck.length>0) document.getElementById('techFlipWrap').style.pointerEvents='auto';
   updateUI();
 }
 
@@ -574,9 +577,9 @@ document.getElementById('mobileToggle').addEventListener('click',()=>{
   document.getElementById('mobileToggle').setAttribute('aria-expanded',String(!open));
 });
 
-// Keyboard support on deck stacks
-document.getElementById('scenStack').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')drawScenario();});
-document.getElementById('techStack').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')drawTech();});
+// Keyboard support on clickable cards
+document.getElementById('scenFlipWrap').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')drawScenario();});
+document.getElementById('techFlipWrap').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')drawTech();});
 
 // ── Particles ──
 (function(){
