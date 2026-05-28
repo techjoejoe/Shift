@@ -9,6 +9,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="icon" href="https://res.cloudinary.com/dwfzc3ygn/image/upload/v1757000236/20250728_2040_3D_Pixar_Logo_remix_01k19xa7z0e18bsmxtjw7cc07p_1_pjwgsv.png" type="image/png" sizes="32x32" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1W02DWJRVV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1W02DWJRVV', {page_title: 'SHIFT Card Game'});
+  </script>
   <style>
     :root {
       --primary:#FF6B35;--primary-dark:#E55A2B;--secondary:#F7931E;
@@ -576,6 +585,8 @@ function drawScenario(){
   requestAnimationFrame(()=>{ document.getElementById('scenInner').classList.add('flipped'); });
   scenDrawn=true;
   document.getElementById('scenFlipWrap').style.pointerEvents='none';
+  // GA4 event
+  if(typeof gtag!=='undefined') gtag('event','card_drawn',{card_type:'scenario',card_number:curScen.num,card_text:curScen.text.substring(0,60)});
   updateUI();
   checkBoth();
 }
@@ -602,6 +613,8 @@ function drawTech(){
   requestAnimationFrame(()=>{ document.getElementById('techInner').classList.add('flipped'); });
   techDrawn=true;
   document.getElementById('techFlipWrap').style.pointerEvents='none';
+  // GA4 event
+  if(typeof gtag!=='undefined') gtag('event','card_drawn',{card_type:'shift',card_name:curTech.name,card_phase:curTech.phase});
   updateUI();
   checkBoth();
 }
@@ -616,6 +629,7 @@ function checkBoth(){
 function newRound(){
   if(scenDeck.length===0&&techDeck.length===0){ shuffleReset(); return; }
   round++;
+  if(typeof gtag!=='undefined') gtag('event','new_round',{round_number:round});
   scenDrawn=false; techDrawn=false;
   document.getElementById('scenInner').classList.remove('flipped');
   document.getElementById('techInner').classList.remove('flipped');
@@ -625,7 +639,10 @@ function newRound(){
   updateUI();
 }
 
-function shuffleReset(){ init(); }
+function shuffleReset(){
+  if(typeof gtag!=='undefined') gtag('event','reset_all');
+  init();
+}
 
 // ── Nav ──
 window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50));
