@@ -106,7 +106,7 @@
     .deck-counter{font-size:.78rem;color:var(--gray-500);font-weight:600}
 
     /* ── ACTIVE CARDS ── */
-    .active-area{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
+    .active-area{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;max-width:780px;margin-left:auto;margin-right:auto}
 
     /* flip container — full webkit prefix set for iOS Safari */
     .flip-wrap{
@@ -175,9 +175,15 @@
 
     /* SHIFT card front */
     .shift-front{background:var(--gray-900);display:flex;flex-direction:column;height:100%;border:1px solid rgba(255,107,53,.25)}
-    .sh-letter{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;flex-shrink:0}
-    .sh-phase{font-size:.68rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.8)}
-    .sh-name{font-size:1rem;font-weight:900;color:#fff;margin-top:.1rem}
+    /* Letter badge */
+    .sh-letter{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;color:#fff;flex-shrink:0}
+    /* Phase — the BIG hero label */
+    .sh-phase{
+      font-size:1.3rem;font-weight:900;letter-spacing:-.5px;
+      color:#fff;line-height:1.1;
+    }
+    /* Technique name — supporting, smaller */
+    .sh-name{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.7);margin-top:.2rem;text-transform:uppercase;letter-spacing:1.5px}
 
     /* ── APPLY PROMPT ── */
     .apply-prompt{display:none;background:var(--card-bg);border:1px solid rgba(255,107,53,.25);border-radius:18px;padding:1.5rem 2rem;text-align:center;margin-bottom:1.75rem;animation:fadeUp .4s ease}
@@ -252,7 +258,7 @@
 
       /* Active cards — stack vertically, centered */
       .active-area{grid-template-columns:1fr;gap:1.25rem}
-      .flip-wrap{max-width:300px;margin:0 auto;width:100%}
+      .flip-wrap{max-width:280px;margin:0 auto;width:100%}
       .card-body p{font-size:1.1rem;line-height:1.6}
       .card-header{padding:.85rem 1.1rem}
       .card-footer{padding:.6rem 1rem}
@@ -598,8 +604,8 @@ function drawTech(){
   const el=document.getElementById('techContent');
   el.style.borderColor='rgba(255,107,53,.25)';
   el.innerHTML=`
-    <div class="card-header">
-      <div class="card-header-left">
+    <div class="card-header" style="padding:1rem 1.2rem">
+      <div class="card-header-left" style="gap:.6rem">
         <div class="sh-letter" style="background:${c.bg}">${curTech.letter}</div>
         <div>
           <div class="sh-phase">${curTech.phase}</div>
@@ -608,7 +614,7 @@ function drawTech(){
       </div>
     </div>
     <div class="card-body"><p>${curTech.how}</p></div>
-    <div class="card-footer"><span>SHIFT Framework · ${curTech.phase}</span></div>
+    <div class="card-footer"><span>SHIFT Framework</span></div>
   `;
   requestAnimationFrame(()=>{ document.getElementById('techInner').classList.add('flipped'); });
   techDrawn=true;
